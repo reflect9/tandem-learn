@@ -1,0 +1,533 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="javascripts/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
+    
+    <link href="stylesheets/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    
+   <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Reference</a>
+    </div>
+    
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        
+        <!--<li><a href="#">Introduction</a></li>
+        <li><a href="#">Tasks</a></li>
+        <li><a href="reference">Reference</a></li>-->
+      </ul>
+    </div>
+    
+  </div>
+</div>
+
+<div class="container-fluid referenceTandem">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <!--<li class="active"><a href="#" chapterCode="intro">Introduction</a></li>
+        <li><a href="#" chapterCode="basicUI">Basic UI</a></li>
+        <li><a href="#" chapterCode="creatingNodes">Creating Nodes</a></li>
+        <li><a href="#" chapterCode="extraction">Extracting Page Elements</a></li>
+        <li><a href="#" chapterCode="getAttributes">Getting Attributes from Elements</a></li>
+        <li><a href="#" chapterCode="creatingNodes">Creating New Elements</a></li>
+        <li><a href="#" chapterCode="copyElements">Copying Elements From Other Sites</a></li>
+        <li><a href="#" chapterCode="trigger">Event Trigger</a></li>
+        <li><a href="#" chapterCode="filter">Filtering Items</a></li>
+        <li><a href="#" chapterCode="setAttribute">Modifying Element Attributes</a></li>
+          <hr>
+          <li><a href="#" chapterCode="task1">Task 1</a></li>
+          <li><a href="#" chapterCode="task2">Task 2</a></li>
+          <li><a href="#" chapterCode="task3">Task 3</a></li>-->
+      </ul>
+      <script>
+      $("document").ready(function() {
+          var chapters = $('.main').find("h1,h3,h4").toArray();
+          var sidebar = $("ul.nav-sidebar");
+          $.each(chapters, function(i,ch) {
+              var title = $(ch).text();
+              var level = $(ch).prop('tagName');
+              $("<li level='"+level+"'>"+title+"</li><ul class='operation_list' kind='"+title.toLowerCase()+"'></ul>").appendTo(sidebar);
+          });
+          var operations = $('.main').find("li.operation_item").toArray();
+          $.each(operations, function(i,op) {
+            var target_ul = $(sidebar).find("ul.operation_list[kind='"+$(op).attr("kind")+"']");
+            var op_clone = $(op).clone();
+            
+            $(op_clone).click($.proxy(function() {
+              $('html, body').animate({
+                 scrollTop: ($(this.op).offset().top-60)
+              },0);
+            },{op:op})).appendTo(target_ul);
+
+          });
+          $(".show_examples").click(function() {
+            $(this).parents('.op_instruction').find(".examples").toggle('fast');
+          });
+      });
+      </script>
+    </div>
+    <!-- MAIN MATERIAL -->
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <div class="chapter">
+        <h1>Reference</h1>
+        Tandem has a library that offers over 30 operations for building a wide range of interactive Web enhancements.  
+      </div>
+
+      <div class="chapter">
+        <h3 kind='pick'>Pick</h3>
+        Select / find / load information from the Web.
+
+        <ul class="operation_list">
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="pick" type="extract_element">
+            <div class="op_icon"> <i class="fa fa-crosshairs fa-lg"></i>
+            </div>
+            <div class="op_type">Extract Element</div>
+          </li>
+          <div class="op_description">Extract elements at [selector] from [source].</div>
+          <div class='op_instruction' type='extract_element'>
+            Extract DOM elements from the <em>[source]</em> node's values. As <em>[selector]</em> would be a very long query string, it is almost impossible to specify the query directly. Instead, set up the current node values to be the elements within the source. Tandem will suggest a correct <em>[selector]</em>.    
+            <div class='show_examples'>Show Demo video</div>
+            <div class="examples" style='display:none;'>
+              <div class="video"><OBJECT classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="720"
+                  height="450" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
+                  <param name='src' value="videos/4_inspector.mp4
+                  ">
+                  <param name='autoplay' value="false">
+                  <param name='controller' value="true">
+                  <param name='loop' value="false">
+                  <EMBED src="videos/4_inspector.mp4
+                  " width="720" height="450" autoplay="false" scale="tofit"
+                  controller="true" loop="false" pluginspage='videos/4_inspector.mp4
+                  '>
+                  </EMBED>
+              </OBJECT></div>
+            </div>
+          </div>
+
+
+
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="pick" type="extract_parent">
+            <div class="op_icon"> <i class="fa fa-crosshairs fa-lg"></i>
+            </div>
+            <div class="op_type">Extract Parent</div>
+          </li>
+          <div class="op_description">Get enclosing elements of [source], [step]-step above.</div>
+          <div class='op_instruction' type='extract_parent'>
+            Select parent elements of the <em>[source]</em> node. For example, when the source node contains the "Gas"(SPAN tag) in the figure below, <em>Extract Parent</em> with <em>1,2,and 3-steps</em> will yield higher parent elements, TD, TR, and TBODY respectively.
+          <img src="images/ref_extract_parent_1.png" class="centered"/>
+
+          </div>
+
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="pick" type="find_tab">
+            <div class="op_icon">
+              <i class="fa fa-folder-open fa-lg"></i>
+            </div>
+            <div class="op_type">Find Tab</div>
+          </li>
+          <div class="op_description">Find a currently open [url], and execute the following nodes in the tab.</div>
+          <div class='op_instruction' type='find_tab'>
+            <b>Not available in this version. </b>
+          </div>
+
+
+
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="pick" type="get_attribute">
+            <div class="op_icon">
+              <i class="fa fa-list-alt fa-lg"></i>
+            </div>
+            <div class="op_type">Get Attribute</div>
+          </li>
+          <div class="op_description">Get [key] of [source].</div>
+          <div class='op_instruction' type='get_attribute'>
+            <em>[source]</em> node can hold any page elements. <br>
+            <em>[key]</em> must be a property name of the element in the <em>[source]</em> node. 
+            <br>The following table lists up the keys supported in Tandem.  
+            <table class="table table-bordered" style="width:600px; margin:10px;">
+              <thead>
+                <tr>
+                  <th>key</th>
+                  <th>description</th>
+                  <th>applicable tags</th>
+                </tr>
+              </thead>
+              <tr>
+                <td class='code'>text</td>
+                <td>text content within a page element.</td>
+                <td>All</td>
+              </tr>
+              <tr>
+                <td class='code'>value</td>
+                <td>value within &lt;select&gt; or &lt;input&gt; tags.</td>
+                <td>&lt;SELECT&gt;, &lt;INPUT&gt;</td>
+              </tr>
+              <tr>
+                <td class='code'>checked</td>
+                <td>Either checkbox is checked or not.</td>
+                <td>&lt;INPUT type='checkbox'&gt;</td>
+              </tr>
+              <tr>
+                <td class='code'>download</td>
+                <td>File name of downloadable links.</td>
+                <td>&lt;A&gt;</td>
+              </tr>
+              <tr>
+                <td class='code'>visibility</td>
+                <td>Setting it to 'none' will make the element invisible.</td>
+                <td>All</td>
+              </tr>
+              <tr>
+                <td class='code'>color</td>
+                <td>Text color can be any standard color names (e.g. red, green) listed <a href='http://www.w3schools.com/cssref/css_colornames.asp' target='_blank'>here</a>, or valid <a href='http://www.w3schools.com/cssref/css_colors.asp' target='_blank'>RGB values</a>.</td>
+                <td>All</td>
+              </tr>
+              <tr>
+                <td class='code'>background-color</td>
+                <td>Background color of element allows the same rule as color.</td>
+                <td>All</td>
+              </tr>
+              <tr>
+                <td class='code'>source</td>
+                <td>'src' attribute of image tag.</td>
+                <td>&lt;IMG&gt;</td>
+              </tr>
+              <tr>
+                <td class='code'>link</td>
+                <td>URL of clickable link.</td>
+                <td>&lt;A&gt;</td>
+              </tr>
+
+            </table>      
+
+          </div>
+
+
+
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="pick" type="load_page">
+            <div class="op_icon">
+              <i class="fa fa-globe fa-lg"></i>
+            </div>
+            <div class="op_type">Load Page</div>
+          </li>
+          <div class="op_description">Load pages of URLs in [source] using [mode].</div>
+          <div class='op_instruction' type='load_page'>
+            <b>Too complex to explain now.</b>
+          </div>
+
+
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="pick" type="substring">
+            <div class="op_icon">
+              <i class="fa fa-font fa-lg"></i>
+            </div>
+            <div class="op_type">Substring</div>
+          </li>
+          <div class="op_description">Get part of text in [source] from [from] to [to], including from([include_from]]) and to([include_to]).</div>
+          <div class='op_instruction' type='substring'>
+            ...
+          </div>
+        </ul>
+
+
+
+
+
+      </div> <!-- END OF PICK -->
+
+
+      <div class="chapter">
+        <h3 kind='transform'>Transform</h3>
+        Transforms a list of values to another form.
+
+
+        <ul class="operation_list">
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="transform" type="arithmetic">
+            <div class="op_icon">
+              <i class="fa fa-columns fa-lg"></i>
+            </div>
+            <div class="op_type">Arithmetic</div>
+            <div class="op_description">Calculate [operand_A] [operator] [operand_B]</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="transform" type="compose_text">
+            <div class="op_icon">
+              <i class="fa fa-font fa-lg"></i>
+            </div>
+            <div class="op_type">Compose Text</div>
+            <div class="op_description">
+              Compose each pair of [text_A] and [text_B] connected by [connector].
+            </div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="transform" type="count">
+            <div class="op_icon">
+              <i class="fa fa-list-ol fa-lg"></i>
+            </div>
+            <div class="op_type">Count</div>
+            <div class="op_description">Count [source].</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="transform" type="filter">
+            <div class="op_icon">
+              <i class="fa fa-filter fa-lg"></i>
+            </div>
+            <div class="op_type">Filter</div>
+            <div class="op_description">Filter items in [items] by [true_or_false] of [booleans].</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="transform" type="join">
+            <div class="op_icon">
+              <i class="fa fa-bars fa-lg"></i>
+            </div>
+            <div class="op_type">Join</div>
+            <div class="op_description">Join all the inputs.</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="transform" type="literal">
+            <div class="op_icon">
+              <i class="fa fa-quote-right fa-lg"></i>
+            </div>
+            <div class="op_type">Literal</div>
+            <div class="op_description">Directly set the current node data to [source].</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="transform" type="literal_element">
+            <div class="op_icon">
+              <i class="fa fa-quote-right fa-lg"></i>
+            </div>
+            <div class="op_type">Literal Element</div>
+            <div class="op_description">
+              Create a new element of [jsonML], which was extracted from exiting Web elements.
+            </div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="transform" type="number_test">
+            <div class="op_icon">
+              <i class="fa fa-columns fa-lg"></i>
+            </div>
+            <div class="op_type">Number Test</div>
+            <div class="op_description">Evaluate [operand_A] [operator] [operand_B].</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="transform" type="sort">
+            <div class="op_icon">
+              <i class="fa fa-sort-alpha-asc fa-lg"></i>
+            </div>
+            <div class="op_type">Sort</div>
+            <div class="op_description">Sort [source] in [direction]-order.</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="transform" type="string_test">
+            <div class="op_icon">
+              <i class="fa fa-columns fa-lg"></i>
+            </div>
+            <div class="op_type">String Test</div>
+            <div class="op_description">Distinguish whether [key] is [isIn] [source] .</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="transform" type="sum">
+            <div class="op_icon">
+              <i class="fa fa-list-ol fa-lg"></i>
+            </div>
+            <div class="op_type">Sum</div>
+            <div class="op_description">Add all numbers in [source].</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="transform" type="unique">
+            <div class="op_icon">
+              <i class="fa fa-bars fa-lg"></i>
+            </div>
+            <div class="op_type">Unique</div>
+            <div class="op_description">Get list of unique elements of [source].</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="chapter">
+        <h3 kind='apply'>Apply</h3>
+        Customizes existing Web pages by hiding / changing / attaching new elements.
+
+
+        <ul class="operation_list">
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="apply" type="attach_element">
+            <div class="op_icon">
+              <i class="fa fa-gavel fa-lg"></i>
+            </div>
+            <div class="op_type">Attach Element</div>
+            <div class="op_description">Attach [source] to [target] at [front_or_back].</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="apply" type="click">
+            <div class="op_icon">
+              <i class="fa fa-hand-o-up fa-lg"></i>
+            </div>
+            <div class="op_type">Click</div>
+            <div class="op_description">Click [target].</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="apply" type="create_element">
+            <div class="op_icon">
+              <i class="fa fa-magic fa-lg"></i>
+            </div>
+            <div class="op_type">Create Element</div>
+            <div class="op_description">Create [tag] elements using the [value].</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="apply" type="hide">
+            <div class="op_icon">
+              <i class="fa fa-eye-slash fa-lg"></i>
+            </div>
+            <div class="op_type">Hide</div>
+            <div class="op_description">Hide elements in [target].</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="apply" type="keyboard">
+            <div class="op_icon">
+              <i class="fa fa-keyboard-o fa-lg"></i>
+            </div>
+            <div class="op_type">Keyboard</div>
+            <div class="op_description">Type [text] at [inputBox].</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="apply" type="set_attribute">
+            <div class="op_icon">
+              <i class="fa fa-pencil-square-o fa-lg"></i>
+            </div>
+            <div class="op_type">Set Attribute</div>
+            <div class="op_description">Set [key] attributes of [target] to [new_value].</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="apply" type="show">
+            <div class="op_icon">
+              <i class="fa fa-eye fa-lg"></i>
+            </div>
+            <div class="op_type">Show</div>
+            <div class="op_description">Show elements in [target].</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="apply" type="store">
+            <div class="op_icon">
+              <i class="fa fa-save fa-lg"></i>
+            </div>
+            <div class="op_type">Store</div>
+            <div class="op_description">Store [data] in [permission] storage.</div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="chapter">
+        <h3 kind='flow'>Flow</h3>
+        Manages program structure such as event handling. 
+
+
+        <ul class="operation_list">
+          <li class="operation_item draggableItem ui-draggable" mode="small" kind="flow" type="trigger">
+            <div class="op_icon">
+              <i class="fa fa-bell fa-lg"></i>
+            </div>
+            <div class="op_type">Trigger</div>
+            <div class="op_description">
+              Trigger the following nodes when [event_source] is loaded, clicked, or changed.
+            </div>
+            <div class="op_actions">
+              <button class="simple doc_button">Show Documentation</button>
+            </div>
+            <label class="simple insert_task">Apply to current node</label>
+          </li>
+        </ul>
+
+      </div>
+
+
+
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="javascripts/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
+    
+    <link href="stylesheets/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body class='taskBody'>
+
+<div class="container-fluid">
+    <div class='main'>
+      <h1>Tasks</h1>
+      Three friends (Smith, Jone, and Kim) made a long list of spendings after a roadtrip. The following list is part of it. You will add a few functionality to the list.     
+      
+
+      <div class='groupSpendings'> 
+        <ul>
+          <li>
+            <span class='title'>POTBELLY SANDWICH</span>
+            <span class='category'>Food/Beverage</span>
+            <div class='spending'>
+              <span class='amount'>$21.5</span>              
+              by <span class='person'>Smith</span>
+              ,
+              <span class='when'>
+                <span class='month'>AUG</span>
+                <span class='day'>11</span>  
+              </span>,
+              <span class='location'>COLLEGE PARK, MD</span>
+            </div>
+          </li>
+          <li>
+            <span class='title'>SHELL</span>
+            <span class='category'>Gas</span>
+            <div class='spending'>
+              <span class='amount'>$50.12</span>              
+              by <span class='person'>Jone</span>
+              ,
+              <span class='when'>
+                <span class='month'>AUG</span>
+                <span class='day'>12</span>  
+              </span>,
+              <span class='location'>COLLEGE PARK, MD</span>
+            </div>
+          </li>
+          <li>
+            <span class='title'>SHOPPERS</span>
+            <span class='category'>Grocery</span>
+            <div class='spending'>
+              <span class='amount'>$23.74</span>              
+              by <span class='person'>Kim</span>
+              ,
+              <span class='when'>
+                <span class='month'>AUG</span>
+                <span class='day'>12</span>  
+              </span>,
+              <span class='location'>FAIRFAX, VA</span>
+            </div>
+          </li>
+          <li>
+            <span class='title'>STARBUCKS</span>
+            <span class='category'>Bar/Cafe</span>
+            <div class='spending'>
+              <span class='amount'>$21.5</span>              
+              by <span class='person'>Jone</span>
+              ,
+              <span class='when'>
+                <span class='month'>AUG</span>
+                <span class='day'>14</span>  
+              </span>,
+              <span class='location'>COLLEGE PARK, MD</span>
+            </div>
+          </li> 
+          <li>
+            <span class='title'>BESTBUY.COM</span>
+            <span class='category'>Merchandise/Suppliers</span>
+            <div class='spending'>
+              <span class='amount'>$18.3</span>              
+              by <span class='person'>Smith</span>
+              ,
+              <span class='when'>
+                <span class='month'>AUG</span>
+                <span class='day'>15</span>  
+              </span>,
+              <span class='location'>RICHFIELD, MN</span>
+            </div>
+          </li>      
+          <li>
+            <span class='title'>LEMONGRASS</span>
+            <span class='category'>Restaurant</span>
+            <div class='spending'>
+              <span class='amount'>$67.1</span>              
+              by <span class='person'>Kim</span>
+              ,
+              <span class='when'>
+                <span class='month'>AUG</span>
+                <span class='day'>16</span>  
+              </span>,
+              <span class='location'>ANNAPOLIS, MD</span>
+            </div>
+          </li>      
+        </ul>
+      </div>
+
+     <div><table class='table table-bordered groupSpendings'>
+          <thead>
+          <tr><th>-</th><th>Date</th><th>Title and Description</th><th>Person</th><th>Amount</th></tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td></td>
+            <td><span class='month'>AUG</span><span class='day'>11</span></td>
+            <td>  <span class='title'>POTBELLY SANDWICH</span>
+                  <span class='category'>Food/Beverage</span>
+                  <span class='location'>COLLEGE PARK, MD</span>
+            </td> 
+            <td>Smith</td> 
+            <td>$21.5</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><span class='month'>AUG</span><span class='day'>12</span></td>
+            <td>  <span class='title'>SHELL </span>
+                  <span class='category'>Gas</span>
+                  <span class='location'>COLLEGE PARK, MD</span>
+            </td> 
+            <td>Jone</td> 
+            <td>$50.12</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><span class='month'>AUG</span><span class='day'>12</span></td>
+            <td>  <span class='title'>SHOPPERS</span>
+                  <span class='category'>Grocery</span>
+                  <span class='location'>FAIR FAX, VA</span>
+            </td> 
+            <td>Kim</td> 
+            <td>$23.74</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><span class='month'>AUG</span><span class='day'>14</span></td>
+            <td>  <span class='title'>STARBUCKS</span>
+                  <span class='category'>Bar/Cafe</span>
+                  <span class='location'>COLLEGE PARK, MD</span>
+            </td> 
+            <td>Jone</td> 
+            <td>$21.5</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><span class='month'>AUG</span><span class='day'>15</span></td>
+            <td>  <span class='title'>BESTBUY.COM</span>
+                  <span class='category'>Merchandise/Suppliers</span>
+                  <span class='location'>RICHFIEND, MN</span>
+            </td> 
+            <td>Smith</td> 
+            <td>$21.5</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><span class='month'>AUG</span><span class='day'>15</span></td>
+            <td>  <span class='title'>AROY THAI</span>
+                  <span class='category'>Restaurant</span>
+                  <span class='location'>COLLEGE PARK, MD</span>
+            </td> 
+            <td>Smith</td> 
+            <td>$67.1</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><span class='month'>AUG</span><span class='day'>15</span></td>
+            <td>  <span class='title'>DELAWARE EZPASS</span>
+                  <span class='category'>Transportation - Tolls & Fees</span>
+                  <span class='location'>DOVER, ME</span>
+            </td> 
+            <td>Kim</td> 
+            <td>$50.0</td>
+          </tr>
+          </tbody>
+          <tfoot>
+            <td colspan="5"><div class='total'>The total spending is </div></td>
+          </tfoot>
+      </table></div>
+      
+
+    </div>
+</div>
+
+</body>
+
+
+</html>
