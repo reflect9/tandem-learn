@@ -298,15 +298,17 @@
             </div>
 
             <div class="chapter">   
-                <h3>Suggesting actions based on the values</h3>
+                <h3>Getting suggested actions based on the values</h3>
                 Imagine a situation that you know <b>what to do</b> but have no idea of <b>how to do it</b>. Instead of flipping through the documentation or Googling, version A allows you to <b style='color:red;'>express your intent with input and current node values</b>. It is like saying <blockquote>I have a <b>fresh egg, butter, and coconut</b> [input values]. <br> How can I bake delicious <b>macarons</b> [desired outcome] with them?</blockquote>  
-                <br>Let's see some example situations.    
-                
+                <br>Let's learn how to get suggested actions in Tandem.    
+                    <img class="centered" src="images/suggestion.png" width="700px"/>
+                <!--
                 <h4>0-input node cases</h4>
                 <div>
                 When there is no input, the generator would think that you want to create constant values or extract those elements from the current page. As illustrated below, Tandem (1) suggests an action that creates the value, 2) user confirms the action to be the current node's operation, and executes the operation to update the node value.  
                     <img class="centered" src="images/suggestion_0_input.png" width="600px"/>
                 </div>
+                
 
                 <h4>1-input node cases</h4>
                 <div>
@@ -318,10 +320,32 @@
                 Other types of node values yield a variety of suggestions.  
                     <img class="centered" src="images/suggestion_1_input_3.png" width="700px"/>
                 </div>
+                -->
+                <h4>Using multiple input nodes</h4>
+                Some actions require multiple input nodes (e.g. egg and butter). It takes several steps as below.
+                    <img class='centered' src='images/suggestion_2way.png' width="700px"></img>
 
-                <h4>2-input nodes</h4>
 
-                A detailed procedure of using the generator takes several steps as shown below.
+
+
+
+
+                <!--  
+                ==========================================================================================
+                ==========================================================================================
+                ==========================================================================================
+                -->
+
+                <h1 class='tandem-h1'>Tutorial - B</h1>
+                <div class="chapter" style="margin-top:0px;">   
+                    Tandem - <b>version B</b> follows traditional programming style. Users need to <b>directly choose the operation</b> that they need, and <b>manually set the parameters</b>. 
+                    <img class='centered' src='images/direct_specification.png' width="700px"></img>
+                </div>
+
+
+
+                <!--
+
                 <ol>
                     <li>Create an empty node (A).
                         <img class='centered' src='images/generating_action_1.png' width="100px"></img>
@@ -329,7 +353,7 @@
                     <li>By default, newly created nodes take input nodes from above and left. Create input nodes B and C above and/or left side of the node.    
                     <img class='centered' src='images/generating_action_2.png' width="100px"></img>
                     Otherwise, if B and C need to be at other places, you can manually connect A's inputs to them. Press <i class="fa fa-crosshairs"></i> and click the node that you want to set as an input node. The following video demonstrates it. 
-                        <!--
+                        
                         <div class='video'><OBJECT classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="720"
                             height="450" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
                             <param name='src' value="videos/gen_oper_1.mp4
@@ -342,7 +366,7 @@
                             controller="true" loop="false" pluginspage='videos/gen_oper_1.mp4
                             '>
                             </EMBED>
-                        </OBJECT></div> -->
+                        </OBJECT></div> ]
                     </li>
                     <li>Make sure that the input nodes contain values that the operation will use. For example, to create a [Arithmetic] operation both input nodes must contain number values. Let's put [1,2,3] in B, and [4] in C.
                     <img class='centered' src='images/generating_action_3.png' width="150px"></img>
@@ -357,7 +381,7 @@
                     </li> 
                     <li>Done!</li>
                 </ol> 
-            
+                -->
                 <!--
                 Watch the following video of building a simple enhancement that can calculate the average of given numbers.      
                 
@@ -455,11 +479,11 @@
             -->
             
             
-
+            <!--
             <div class="chapter"> 
                 <h3>Practice: Calculating the average</h3>
                 This video will show how to create a simple module of four nodes that calculates the average value of given numbers.
-                <!--
+                
                 <div class="video"><OBJECT classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="720"
                     height="450" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
                     <param name='src' value="videos/3_getting_average-sym.mp4
@@ -473,7 +497,7 @@
                     '>
                     </EMBED>
                 </OBJECT></div>
-                -->
+                
                 <div class='try'>
                     <span class="label label-warning try">Try</span>    
                     <span class='main_task'>Finish watching the video, and follow the same steps to build a module that calculates the average of given numbers.</span>
@@ -489,12 +513,8 @@
                     </div>
                 </div>
             </div>
-            <div class="chapter"> 
-
-
-            </div>
-
-
+            -->
+            <!--
             <div class="chapter"> 
                 <h3>Setting element attributes</h3>
                 Modifying existing Web elements require two inputs; 1) Elements to update and 2)new values. In the figure below, the [Set Attribute] node changes background-color attributes of the three elements to red.   
@@ -534,7 +554,9 @@
                         </tr>
                     </table></center>
             </div>
+            -->
 
+            <!--
             <div class="chapter"> 
                 <h3>Getting attributes from elements</h3>
                 Web elements contain many kinds of attributes. For example, a link element may contain text, download, visibility, color, background-color, link, and more. To get specific attributes from elements, follow the steps below. 
@@ -555,7 +577,7 @@
 
             <!--<center><button type="button" role="open_section_2" class="btn btn-success">Proceed</button></center>-->
 
-
+            <!--
             <div class="chapter"> 
                 <h3>Filtering items</h3>
                 Filtering is a common procedure that chooses subset among a list of items. For example, imagine you are interested in cars from a specific brand in an online market. First you need to filter the postings by the brand names you are interested in. Then with the filtered items, you can do many things such as highlighting them to stand out, hide the rest, or even creating a digest report and sending yourself. <br>
@@ -603,7 +625,8 @@
                 </ol>
             </div>
 
-
+            -->
+            <!--
             <div class="chapter"> 
                 <h3>Interactivity</h3>
                 Tandem allows end-users to create interactive components and specify what will happen when they are clicked or changed. Interactive components (e.g. buttons, combo-box, text input) can make programs much more flexible and useful in various situations. To see an example, load [Interactive Data Table] enhancement, and execute. It will make an ordinary table below interactive so that you can change the weight of each person and toggle checkboxes to include or exclude the person to calculate the weighted sum.
@@ -614,7 +637,7 @@
                         <tr><td>John</td><td>Doe</td><td>80</td></tr>
                         <tr><td>Adam</td><td>Johnson</td><td>67</td></tr>
                     </table></center>
-                    <!--<img class="centered" src='images/intVSnon-int.png'  width="700"/>-->
+                    <img class="centered" src='images/intVSnon-int.png'  width="700"/>
                 The following example creates buttons for every row. When a button is clicked, it will change the corresponding row's color to blue. 
                     <center><table class='table table-bordered' style="width:400px">
                         <thead><tr><th>Common apple name</th><th>Origin</th><th>Year</th><th>Use</th></tr></thead>
@@ -637,7 +660,7 @@
                 <li>The last step is to set color attribute of the row to 'blue'.</li>
                 </ol>
 
-<!--                 <a href="videos/movie-interactive.mov" target="_blank">movie</a>
+              <a href="videos/movie-interactive.mov" target="_blank">movie</a>
                 <OBJECT classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="640"
                     height="360" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
                     <param name='src' value="videos/movie-interactive.mov">
@@ -647,10 +670,10 @@
                     <EMBED src="videos/movie-interactive.mov" width="640" height="360" autoplay="true" 
                     controller="true" loop="true" pluginspage='videos/movie-interactive.mov'>
                     </EMBED>
-                </OBJECT> -->
+                </OBJECT> 
 
             </div>      
-            
+            -->
 
 
             <div class="chapter"> 
@@ -685,22 +708,6 @@
             </div>
 
             
-
-
-
-
-            <h1 class="page-header">Tutorial - B</h1>
-
-            <div class="chapter" chapterCode=""  chapterType="both"> 
-            <h3>something</h3>
-
-            </div>
-
-
-
-
-
-            <h1 class="page-header" style='margin-top:40px;'>Tasks - B</h1>
 
 	    </div>
   	</div> <!-- row -->
