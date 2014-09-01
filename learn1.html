@@ -301,7 +301,7 @@
 
             <!--<h1 class='tandem-h1'>Tutorial - B</h1>-->
             <div class="chapter" style="margin-top:0px;">   
-                <h3>M1. Direct specification</h3>
+                <h3>Direct specification</h3>
                 Tandem also allows traditional programming style. Users can <b>directly choose the operation</b> that they need, and <b>manually set the parameters</b>. 
                 <img class='centered' src='images/direct_specification.png' width="700px"></img>
             </div>
@@ -309,11 +309,11 @@
 
 
             <div class="chapter">   
-                <h3>M2. Generator</h3>
+                <h3>Generator</h3>
                 
-                <p>Tandem has an advanced support called the <em>generator</em> that suggests actions matching with context, which is currently selected node's value and input nodes. </p>
+                <p>Tandem has an advanced support called the <em>generator</em> that suggests actions for current context.</p>
                 
-                <p>Imagine a situation that you know <b>what to do</b> but have no idea of <b>how to do it</b>. Instead of flipping through the documentation or Googling, version A allows you to <b style='color:red;'>express your intent with input and current node values</b>. It is like saying <blockquote>I have a <b>fresh egg, butter, and coconut</b> [input values]. <br> How can I bake delicious <b>macarons</b> [desired outcome] with them?</blockquote>  
+                <p>Imagine a situation that you know <b>what to do</b> but have no idea of <b>how to do it</b>. Instead of searching in the documentation, the generator allows users to <b style='color:red;'>express intent with input nodes and current node's values</b>. It is like saying <blockquote>I have a <b>fresh egg, butter, and coconut</b> [input values]. <br> How can I bake delicious <b>macaroons</b> [desired outcome] with them?</blockquote>  
                 </p>
                 
                 Let's learn how to get suggested actions in Tandem.    
@@ -346,11 +346,9 @@
 
 
 
-
-
             <div class="chapter" style="margin-top:150px;"> 
                 <h1 class="page-header">Tasks</h1>
-                You have learned the very basic usage of Tandem. Let's learn five types of common tasks. 
+                You have learned the very basic usage and two methods for creating operations in Tandem. Let's learn five types of common tasks. 
 
                 <br>We prepared several problems for each task type. First, you will try to solve them without any instruction. After the first trial, we will be given some instruction and examples. Then you will try the task again.  
                 
@@ -358,14 +356,14 @@
             <div class="chapter">
                 <h4>1.Calculating Numbers</h4>
                 Try the task before seeing the instruction and examples. 
-                <button type="button" class="centered btn btn-info btn-lg" id="button-open-task">Open task page</button></p>
+                <button type="button" class="centered btn btn-info btn-lg" id="button-open-task">Start Task</button></p>
                 <script>
                     $("button#button-open-task").click(function() {
-                        window.open("task#calculation","tandem");
+                        window.open("task.html?task=calculation","tandem");
                     });
                 </script>
 
-                Did you finish the task? Click the button below, and learn how to  
+                How did you do the task? Let's learn how to use the two methods for the task.    
                 <button type="button" class="centered btn btn-success btn-lg" target='calculation'>Show instruction and examples</button>
                 <div class='instruction hidden' role='calculation'>
                 instruction for calculating number tasks
@@ -377,11 +375,11 @@
                 </script>
                 </p>
                 <p>
-                Complete the task again.
-                <button type="button" class="centered btn btn-info btn-lg" id="button-open-task">Open task page</button>
+                Repeat the task again. 
+                <button type="button" class="centered btn btn-info btn-lg" id="button-open-task">Start Task</button>
                 <script>
                     $("button#button-open-task").click(function() {
-                        window.open("task#calculation","tandem");
+                        window.open("task.html?task=calculation","tandem");
                     });
                 </script>
                 </p>
