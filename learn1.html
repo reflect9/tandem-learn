@@ -270,7 +270,7 @@
                 <br>The steps are <br>
                 <ol>
                     <li><b>Select an empty node</b>.</li> 
-                    <li><b>Click any page element</b> that you want to extract. <i>Element Inspector</i> panel will show up. The top line (BODY> DIV> DIV> DIV> DIV) shows the hierarchy of enclosing elements. You can click one of them to switch selection.</li>
+                    <li><b>Click any page element</b> that you want to extract. <i>Element Inspector</i> panel will show up. The top line ("BODY> DIV> DIV> DIV> DIV") shows HTML tags of the elements enclosing the current selection. You can hover over them and click one to switch selection.</li>
                         <img class="centered" src='images/extract_panel.png'/>
                     <li><b>Click [Extract] button</b> to extract the element and add to the current node values.</li>
                     <li>If you want to extract more than one elements, <b>extract couple more elements</b>.</li>  
@@ -354,12 +354,12 @@
                 
             </div>
             <div class="chapter">
-                <h4>1.Calculating Numbers</h4>
+                <h3>1.Calculating Numbers</h3>
                 Try the task before seeing the instruction and examples. 
-                <button type="button" class="centered btn btn-info btn-lg" id="button-open-task">Start Task</button></p>
+                <button type="button" class="centered btn btn-info btn-lg" id="button-task-calculation1">Start Task</button></p>
                 <script>
-                    $("button#button-open-task").click(function() {
-                        window.open("task.html?task=calculation","tandem");
+                    $("button#button-task-calculation1").click(function() {
+                        window.open("task.html?task=calculation1","tandem");
                     });
                 </script>
 
@@ -376,10 +376,10 @@
                 </p>
                 <p>
                 Repeat the task again. 
-                <button type="button" class="centered btn btn-info btn-lg" id="button-open-task">Start Task</button>
+                <button type="button" class="centered btn btn-info btn-lg" id="button-task-calculation2">Start Task</button>
                 <script>
-                    $("button#button-open-task").click(function() {
-                        window.open("task.html?task=calculation","tandem");
+                    $("button#button-task-calculation2").click(function() {
+                        window.open("task.html?task=calculation2","tandem");
                     });
                 </script>
                 </p>
@@ -387,15 +387,99 @@
             </div>
 
             <div class="chapter">
-                <h4>2.Creating interactivity</h4>
+                <h3>2.Extracting Information</h3>
+                Try the task before seeing the instruction and examples. 
+                <button type="button" class="centered btn btn-info btn-lg" id="button-task-extraction1">Start Task</button></p>
+                <script>
+                    $("button#button-task-extraction1").click(function() {
+                        window.open("task.html?task=extraction1","tandem");
+                    });
+                </script>
+
+                How did you do the task? Let's learn how to use the two methods for the task.    
+                <button type="button" class="centered btn btn-success btn-lg" target='extraction'>Show instruction and examples</button>
+                <div class='instruction hidden' role='extraction'>
+                instruction for calculating number tasks
+                </div>
+                <script>
+                    $("button[target='extraction']").click(function() {
+                        $("div.instruction[role='extraction']").removeClass("hidden").show('slow');
+                    });
+                </script>
+                </p>
+                <p>
+                Repeat the task again. 
+                <button type="button" class="centered btn btn-info btn-lg" id="button-task-extraction2">Start Task</button></p>
+                <script>
+                    $("button#button-task-extraction2").click(function() {
+                        window.open("task.html?task=extraction2","tandem");
+                    });
+                </script>
+                </p>
 
             </div>
             <div class="chapter">
-                <h4>3.Filtering</h4>
+                <h3>3.Filtering items</h3>
+                Try the task before seeing the instruction and examples. 
+                <button type="button" class="centered btn btn-info btn-lg" id="button-task-filter1">Start Task</button></p>
+                <script>
+                    $("button#button-task-filter1").click(function() {
+                        window.open("task.html?task=filter1","tandem");
+                    });
+                </script>
+
+                How did you do the task? Let's learn how to use the two methods for the task.    
+                <button type="button" class="centered btn btn-success btn-lg" target='filter'>Show instruction and examples</button>
+                <div class='instruction hidden' role='filter'>
+                instruction for calculating number tasks
+                </div>
+                <script>
+                    $("button[target='filter']").click(function() {
+                        $("div.instruction[role='filter']").removeClass("hidden").show('slow');
+                    });
+                </script>
+                </p>
+                <p>
+                Repeat the task again. 
+                <button type="button" class="centered btn btn-info btn-lg" id="button-task-filter2">Start Task</button></p>
+                <script>
+                    $("button#button-task-filter2").click(function() {
+                        window.open("task.html?task=filter2","tandem");
+                    });
+                </script>
+                </p>
 
             </div>
             <div class="chapter">
-                <h4>4.Filtering</h4>
+                <h3>4.Attaching Elements</h3>
+                Try the task before seeing the instruction and examples. 
+                <button type="button" class="centered btn btn-info btn-lg" id="button-task-attach1">Start Task</button></p>
+                <script>
+                    $("button#button-task-attach1").click(function() {
+                        window.open("task.html?task=attach1","tandem");
+                    });
+                </script>
+
+                How did you do the task? Let's learn how to use the two methods for the task.    
+                <button type="button" class="centered btn btn-success btn-lg" target='attach'>Show instruction and examples</button>
+                <div class='instruction hidden' role='attach'>
+                instruction for calculating number tasks
+                </div>
+                <script>
+                    $("button[target='attach']").click(function() {
+                        $("div.instruction[role='attach']").removeClass("hidden").show('slow');
+                    });
+                </script>
+                </p>
+                <p>
+                Repeat the task again. 
+                <button type="button" class="centered btn btn-info btn-lg" id="button-task-attach2">Start Task</button>
+                <script>
+                    $("button#button-task-attach2").click(function() {
+                        window.open("task.html?task=attach2","tandem");
+                    });
+                </script>
+                </p>
 
             </div>
 
