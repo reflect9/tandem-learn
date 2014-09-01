@@ -66,7 +66,7 @@
 	    </div>
 	    <!-- MAIN MATERIAL -->
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1>Tutorial - General</h1>
+            <h1>Tutorial</h1>
             <div class="chapter" style="margin-top:0px;">   
             </div>
 
@@ -80,7 +80,7 @@
                     <li>Add custom filters to any list.</li>
                     <li>Convert plain data tables into interactive calculators.</li>
                 </ul>
-                We prepared two versions (A and B) of Tandem. But in this <b>general</b> tutorial, you will learn the common features first. Eventually you will learn to use both versions, and decide which one is more effective for completing various tasks.</p>
+                In this tutorial, you will learn the basic features.</p>
                 <Br>
                 <div class='try'>
                     <span class="label label-warning try">Try</span>    
@@ -90,7 +90,7 @@
                 <button type="button" class="centered btn btn-info btn-lg" id="button-open-practice">Open practice window</button>
                     <script>
                         $("button#button-open-practice").click(function() {
-                            window.open("practice1.html","practice");
+                            window.open("practice1.html","tandem");
                         });
                     </script>
                 <div class='try'>
@@ -287,20 +287,37 @@
             </div>
 
 
-            <!--  
+            <!--            
             ==========================================================================================
             ==========================================================================================
             ==========================================================================================
             -->
-            <h1 class='tandem-h1'>Tutorial - A</h1>
+
+            <h1 class='tandem-h1'>Two methods</h1>
             <div class="chapter" style="margin-top:0px;">   
-                We built two versions (A and B) of Tandem. While the <em>version A</em> has an advanced support suggesting actions according to the context, <em>version B</em> is manual and straightforward, requiring you to directly choose operations and set parameters. In this chapter, you will how to use <em>version A</em>'s functionality.    
+            Tandem offers two methods for specifying node operations. One method follows the traditional programming style where users manually choose right operations from the list and directly specify details. Another method is using the <b>generator</b> that suggests actions already filled with correct parameters according to the context. It is user's choice which method would be more effective.        
+            </div>
+            
+
+            <!--<h1 class='tandem-h1'>Tutorial - B</h1>-->
+            <div class="chapter" style="margin-top:0px;">   
+                <h3>M1. Direct specification</h3>
+                Tandem also allows traditional programming style. Users can <b>directly choose the operation</b> that they need, and <b>manually set the parameters</b>. 
+                <img class='centered' src='images/direct_specification.png' width="700px"></img>
             </div>
 
+
+
             <div class="chapter">   
-                <h3>Getting suggested actions based on the values</h3>
-                Imagine a situation that you know <b>what to do</b> but have no idea of <b>how to do it</b>. Instead of flipping through the documentation or Googling, version A allows you to <b style='color:red;'>express your intent with input and current node values</b>. It is like saying <blockquote>I have a <b>fresh egg, butter, and coconut</b> [input values]. <br> How can I bake delicious <b>macarons</b> [desired outcome] with them?</blockquote>  
-                <br>Let's learn how to get suggested actions in Tandem.    
+                <h3>M2. Generator</h3>
+                
+                <p>Tandem has an advanced support called the <em>generator</em> that suggests actions matching with context, which is currently selected node's value and input nodes. </p>
+                
+                <p>Imagine a situation that you know <b>what to do</b> but have no idea of <b>how to do it</b>. Instead of flipping through the documentation or Googling, version A allows you to <b style='color:red;'>express your intent with input and current node values</b>. It is like saying <blockquote>I have a <b>fresh egg, butter, and coconut</b> [input values]. <br> How can I bake delicious <b>macarons</b> [desired outcome] with them?</blockquote>  
+                </p>
+                
+                Let's learn how to get suggested actions in Tandem.    
+                <h4>Using a single input node</h4>
                     <img class="centered" src="images/suggestion.png" width="700px"/>
                 <!--
                 <h4>0-input node cases</h4>
@@ -330,17 +347,59 @@
 
 
 
-                <!--  
-                ==========================================================================================
-                ==========================================================================================
-                ==========================================================================================
-                -->
 
-                <h1 class='tandem-h1'>Tutorial - B</h1>
-                <div class="chapter" style="margin-top:0px;">   
-                    Tandem - <b>version B</b> follows traditional programming style. Users need to <b>directly choose the operation</b> that they need, and <b>manually set the parameters</b>. 
-                    <img class='centered' src='images/direct_specification.png' width="700px"></img>
+            <div class="chapter" style="margin-top:150px;"> 
+                <h1 class="page-header">Tasks</h1>
+                You have learned the very basic usage of Tandem. Let's learn five types of common tasks. 
+
+                <br>We prepared several problems for each task type. First, you will try to solve them without any instruction. After the first trial, we will be given some instruction and examples. Then you will try the task again.  
+                
+            </div>
+            <div class="chapter">
+                <h4>1.Calculating Numbers</h4>
+                Try the task before seeing the instruction and examples. 
+                <button type="button" class="centered btn btn-info btn-lg" id="button-open-task">Open task page</button></p>
+                <script>
+                    $("button#button-open-task").click(function() {
+                        window.open("task#calculation","tandem");
+                    });
+                </script>
+
+                Did you finish the task? Click the button below, and learn how to  
+                <button type="button" class="centered btn btn-success btn-lg" target='calculation'>Show instruction and examples</button>
+                <div class='instruction hidden' role='calculation'>
+                instruction for calculating number tasks
                 </div>
+                <script>
+                    $("button[target='calculation']").click(function() {
+                        $("div.instruction[role='calculation']").removeClass("hidden").show('slow');
+                    });
+                </script>
+                </p>
+                <p>
+                Complete the task again.
+                <button type="button" class="centered btn btn-info btn-lg" id="button-open-task">Open task page</button>
+                <script>
+                    $("button#button-open-task").click(function() {
+                        window.open("task#calculation","tandem");
+                    });
+                </script>
+                </p>
+
+            </div>
+
+            <div class="chapter">
+                <h4>2.Creating interactivity</h4>
+
+            </div>
+            <div class="chapter">
+                <h4>3.Filtering</h4>
+
+            </div>
+            <div class="chapter">
+                <h4>4.Filtering</h4>
+
+            </div>
 
 
 
@@ -674,38 +733,6 @@
 
             </div>      
             -->
-
-
-            <div class="chapter"> 
-                <h1 class="page-header">Tasks - A</h1>
-                You have learned the most of Tandem's functionality. Good job! 
-                <br>With your skills and knowledge, you can create a wide range of interactive enhancements. Let's build an enhancement by doing five tasks. 
-                
-                When ready, click the button below. 
-                <button type="button" class="centered btn btn-info btn-lg" id="button-open-task">Open task page</button>
-                <script>
-                    $("button#button-open-task").click(function() {
-                        window.open("task1","practice");
-                    });
-                </script>
-            </div>
-            <div class="chapter">
-                <h4>1.Extracting information</h4>
-
-            </div>
-
-            <div class="chapter">
-                <h4>2.Creating interactivity</h4>
-
-            </div>
-            <div class="chapter">
-                <h4>3.Filtering</h4>
-
-            </div>
-            <div class="chapter">
-                <h4>4.Filtering</h4>
-
-            </div>
 
             
 
