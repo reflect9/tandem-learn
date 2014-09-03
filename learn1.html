@@ -297,13 +297,13 @@
 
             <h1 class='tandem-h1'>Two methods</h1>
             <div class="chapter" style="margin-top:0px;">   
-            Tandem offers two methods for specifying node operations. One method follows the traditional programming style where users manually choose right operations from the list and directly specify details. Another method is using the <b>generator</b> that suggests actions already filled with correct parameters according to the context. It is user's choice which method would be more effective.        
+                Tandem offers two methods for specifying node operations. The first, <b>manual</b> method is to choose operations directly from the list and manually specify details. The second, <b>automatic</b> method suggests appropriate actions that correspond to current context (i.e. node values, recent mouse behaviors). Users choose either manual or automatic method for more efficient programming.
             </div>
             
 
             <!--<h1 class='tandem-h1'>Tutorial - B</h1>-->
             <div class="chapter" style="margin-top:0px;">   
-                <h3>Direct specification</h3>
+                <h3>Manual</h3>
                 Tandem also allows traditional programming style. Users can <b>directly choose the operation</b> that they need, and <b>manually set the parameters</b>. 
                 <img class='centered' src='images/direct_specification.png' width="700px"></img>
             </div>
@@ -311,11 +311,9 @@
 
 
             <div class="chapter">   
-                <h3>Generator</h3>
+                <h3>Automatic</h3>
                 
-                <p>Tandem has an advanced support called the <em>generator</em> that suggests actions for current context.</p>
-                
-                <p>Imagine a situation that you know <b>what to do</b> but have no idea of <b>how to do it</b>. Instead of searching in the documentation, the generator allows users to <b style='color:red;'>express intent with input nodes and current node's values</b>. It is like saying <blockquote>I have a <b>fresh egg, butter, and coconut</b> [input values]. <br> How can I bake delicious <b>macaroons</b> [desired outcome] with them?</blockquote>  
+                <p>Imagine a situation that you know <b>what to do</b> but have no idea of <b>how to do it</b>. Instead of searching the documentation, Tandem's generator allows you to <b style='color:red;'>express your intent with node values and demonstration</b>. It is like saying <blockquote>I have a <b>fresh egg, butter, and coconut</b> [input values]. <br> How can I bake delicious <b>macaroons</b> [desired outcome] with them?</blockquote>  
                 </p>
                 
                 Let's learn how to get suggested actions in Tandem.    
@@ -344,6 +342,9 @@
                 Some actions require multiple input nodes (e.g. egg and butter). It takes several steps as below.
                     <img class='centered' src='images/suggestion_2way.png' width="700px"></img>
 
+                <h4>Using demonstration</h4>
+
+
 
 
 
@@ -361,7 +362,7 @@
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=calculation1">Start Task</button></p>
 
                 How did you do the task? Let's learn how to use the two methods for the task.    
-                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='calculation'>Show instruction and examples</button>
+                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='calculation'>Show instruction</button>
                 <div class='instruction hidden' role='calculation'>
                     <!-- INSTRUCTION = CALCULATION START -->
                     <h4>Direct specification</h4>                    
@@ -384,7 +385,7 @@
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction1">Start Task</button></p>
 
                 How did you do the task? Let's learn how to use the two methods for the task.    
-                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='extraction'>Show instruction and examples</button>
+                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='extraction'>Show instruction</button>
                 <div class='instruction hidden' role='extraction'>
                 instruction for calculating number tasks
                 </div>
@@ -401,7 +402,7 @@
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=filter1">Start Task</button></p>
 
                 How did you do the task? Let's learn how to use the two methods for the task.    
-                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='filter'>Show instruction and examples</button>
+                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='filter'>Show instruction</button>
                 <div class='instruction hidden' role='filter'>
                 instruction for calculating number tasks
                 </div>
@@ -418,7 +419,7 @@
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=attach1">Start Task</button></p>
 
                 How did you do the task? Let's learn how to use the two methods for the task.    
-                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='attach'>Show instruction and examples</button>
+                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='attach'>Show instruction</button>
                 <div class='instruction hidden' role='attach'>
                 instruction for calculating number tasks
                 </div>
@@ -433,7 +434,7 @@
                 Try the task before seeing the instruction and examples. 
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task-students.html?task=modify1">Start Task</button></p>
                 How did you do the task? Let's learn how to use the two methods for the task.    
-                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='modify'>Show instruction and examples</button>
+                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='modify'>Show instruction</button>
                 <div class='instruction hidden' role='modify'>
                 instruction for calculating number tasks
                 </div>
@@ -451,6 +452,10 @@
                         var subject_name = $("input#subject_name").val();
                         if(!subject_name) {
                             alert("Subject name is missing. Please fill in the name input box at the top.");
+                            $("html, body").animate({
+                                scrollTop: 0
+                            },500);
+                            $("input#subject_name").css('background','rgba(255,0,0,0.3').focus();
                             return;
                         }
                         var task = $(this).attr("task");
