@@ -1,5 +1,6 @@
 body.taskBody {
   padding-top: 0px;
+  padding-bottom: 400px;
 }
 .survey p {
   font-size: 18px;
@@ -38,14 +39,21 @@ li.hints_used {
 }
 li.hints_used #num_hints_used {
   color: white;
-  font-weight: 800;
+  font-weight: 600;
+}
+em {
+  font-weight: 600;
+  font-size: smaller;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
 }
 h1.tandem-h1 {
   margin-top: 100px;
   border-bottom: 1px solid #ddd;
 }
 h3,
-h4 {
+h4,
+h5 {
   font-family: Arial, Helvetica, sans-serif;
 }
 h3 {
@@ -56,8 +64,20 @@ h3 {
 }
 h4 {
   margin-top: 40px;
-  font-size: 20px;
-  color: #0099E6;
+  font-size: 22px;
+  color: #02aff0;
+}
+h5 {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #889a0f;
+}
+h6 {
+  margin: 20px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #999;
 }
 div.video {
   text-align: center;
@@ -295,6 +315,9 @@ table.groupSpendings span.location {
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
+}
+.borderless {
+  border: none !important;
 }
 .practice {
   margin-bottom: 80px;

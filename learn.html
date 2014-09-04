@@ -15,6 +15,22 @@
     
     <link href="stylesheets/dashboard.css" rel="stylesheet">
     <link rel="stylesheet" href="stylesheets/style.css">
+
+    <script>
+    $(document).ready(function() {
+        if(window.location.search.match(/modeB/)!=null) {
+            // make manual first, automatic second
+            $.each($("div.manual"), function(i,manual_el) {
+                var auto_el= $(manual_el).parent().find("div.automatic");
+                $(manual_el).appendTo($(auto_el).parent());
+            });
+            generate_sidebar();
+            $(".navbar-brand").find(".mode").text("mode B");
+        } else {
+            $(".navbar-brand").find(".mode").text("mode A");
+        }
+    });
+    </script>
 </head>
 
 <body>
@@ -28,7 +44,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Learning Tandem - Version A</a>
+      <a class="navbar-brand" href="#">Learning Tandem - <span class='mode'></span></a>
     </div>
     
     <div class="navbar-collapse collapse">
@@ -49,9 +65,9 @@
 	      <ul class="nav nav-sidebar">
 	      </ul>
             <script>
-            $("document").ready(function() {
+            var generate_sidebar = function() {
                 var chapters = $('.main').find("h1,h3").toArray();
-                var sidebar = $("ul.nav-sidebar");
+                var sidebar = $("ul.nav-sidebar").empty();
                 $.each(chapters, function(i,ch) {
                     var title = $(ch).text();
                     var level = $(ch).prop('tagName');
@@ -61,15 +77,15 @@
                         },500);
                     },{ch:ch})).appendTo(sidebar);
                 });
+            }
+            $("document").ready(function() {
+                generate_sidebar();
             });
             </script>  
 	    </div>
 	    <!-- MAIN MATERIAL -->
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1>Tutorial</h1>
-            <div class="chapter" style="margin-top:0px;">   
-            </div>
-
             <div class="chapter" chapterCode="intro" chapterType="both">
                 <h3>Introduction</h3>
 	    		<p>Welcome to Tandem!  
@@ -81,9 +97,9 @@
                     <li>Convert plain data tables into interactive calculators.</li>
                 </ul>
                 In this tutorial, you will learn the basic features.</p>
-                <Br>
+                <br></br>
                 <input type='text' id='subject_name' placeholder="Please type your initial here" style='font-size:16px; width:300px;'>
-                <br><br>
+                <br></br><br></br>
                 <div class='try'>
                     <span class="label label-warning try">Try</span>    
                     <span class='main_task'>Click the button below to open the practice window.</span>
@@ -133,7 +149,7 @@
                         Further details of each operation is available at the reference page.   
                     </li>
                 </ul>  
-                <div class="clear:both;">
+                <div class="clear:both;"></div>
                 The following video will introduce the UI components of Tandem UI. You will also learn how to open browse, create, modify, and delete enhancements, and applying operations in the Actions panel to the grid UI.  
                 </div>
                 <!--
@@ -190,8 +206,6 @@
                     <span class="label label-warning try">Try</span>    
                     <span class='main_task'>Remove all the nodes with [delete] or [backspace] key.</span>
                 </div>
-
-            </div>
                 <!--
                 You can see basic information of the current enhancement at the top of the UI. Click the title ("Tandem-AOm7i") and rename it to "hello tandem".
                 <br><img class="centered" src='images/current_enh_info.png'/>
@@ -302,49 +316,47 @@
             
 
             <!--<h1 class='tandem-h1'>Tutorial - B</h1>-->
-            <div class="chapter" style="margin-top:0px;">   
-                <h3>Manual</h3>
-                Tandem also allows traditional programming style. Users can <b>directly choose the operation</b> that they need, and <b>manually set the parameters</b>. 
-                <img class='centered' src='images/direct_specification.png' width="700px"></img>
+            <div>
+                <div class="chapter manual" style="margin-top:0px;">   
+                    <h3>Manual</h3>
+                    Tandem also allows traditional programming style. Users can <b>directly choose the operation</b> that they need, and <b>manually set the parameters</b>. 
+                    <img class='centered' src='images/direct_specification.png' width="700px"/>
+                </div>
+                <div class="chapter automatic">   
+                    <h3>Automatic</h3>
+                    
+                    <p>Imagine a situation that you know <b>what to do</b> but have no idea of <b>how to do it</b>. Instead of searching the documentation, Tandem's generator allows you to <b style='color:red;'>express your intent with node values and demonstration</b>. It is like saying <blockquote>I have a <b>fresh egg, butter, and coconut</b> [input values]. <br> How can I bake delicious <b>macaroons</b> [desired outcome] with them?</blockquote>  
+                    </p>
+                    
+                    Let's learn how to get suggested actions in Tandem.    
+                    <h4>Using a single input node</h4>
+                        <img class="centered" src="images/suggestion.png" width="700px"/>
+                    <!--
+                    <h4>0-input node cases</h4>
+                    <div>
+                    When there is no input, the generator would think that you want to create constant values or extract those elements from the current page. As illustrated below, Tandem (1) suggests an action that creates the value, 2) user confirms the action to be the current node's operation, and executes the operation to update the node value.  
+                        <img class="centered" src="images/suggestion_0_input.png" width="600px"/>
+                    </div>
+                    
+
+                    <h4>1-input node cases</h4>
+                    <div>
+                        When there is 1 input node, the generator tries to find possible <b>linear transformations that can convert the input values to the current node values</b>. The figure below illustrates finding sub-elements from elements of the input node.     
+                         <img class="centered" src="images/suggestion_1_input_1.png" width="700px"/>
+                    Notice that even if the current value only provides the example for the first item,the generator is still able to suggest the correct action for the rest items. The figure below illustrates more patterns of element-to-element transformation.
+                        <img class="centered" src="images/suggestion_1_input_2.png" width="700px"/>
+
+                    Other types of node values yield a variety of suggestions.  
+                        <img class="centered" src="images/suggestion_1_input_3.png" width="700px"/>
+                    </div>
+                    -->
+                    <h4>Using multiple input nodes</h4>
+                    Some actions require multiple input nodes (e.g. egg and butter). It takes several steps as below.
+                        <img class='centered' src='images/suggestion_2way.png' width="700px"/>
+
+                    <h4>Using demonstration</h4>
+                </div>
             </div>
-
-
-
-            <div class="chapter">   
-                <h3>Automatic</h3>
-                
-                <p>Imagine a situation that you know <b>what to do</b> but have no idea of <b>how to do it</b>. Instead of searching the documentation, Tandem's generator allows you to <b style='color:red;'>express your intent with node values and demonstration</b>. It is like saying <blockquote>I have a <b>fresh egg, butter, and coconut</b> [input values]. <br> How can I bake delicious <b>macaroons</b> [desired outcome] with them?</blockquote>  
-                </p>
-                
-                Let's learn how to get suggested actions in Tandem.    
-                <h4>Using a single input node</h4>
-                    <img class="centered" src="images/suggestion.png" width="700px"/>
-                <!--
-                <h4>0-input node cases</h4>
-                <div>
-                When there is no input, the generator would think that you want to create constant values or extract those elements from the current page. As illustrated below, Tandem (1) suggests an action that creates the value, 2) user confirms the action to be the current node's operation, and executes the operation to update the node value.  
-                    <img class="centered" src="images/suggestion_0_input.png" width="600px"/>
-                </div>
-                
-
-                <h4>1-input node cases</h4>
-                <div>
-                    When there is 1 input node, the generator tries to find possible <b>linear transformations that can convert the input values to the current node values</b>. The figure below illustrates finding sub-elements from elements of the input node.     
-                     <img class="centered" src="images/suggestion_1_input_1.png" width="700px"/>
-                Notice that even if the current value only provides the example for the first item,the generator is still able to suggest the correct action for the rest items. The figure below illustrates more patterns of element-to-element transformation.
-                    <img class="centered" src="images/suggestion_1_input_2.png" width="700px"/>
-
-                Other types of node values yield a variety of suggestions.  
-                    <img class="centered" src="images/suggestion_1_input_3.png" width="700px"/>
-                </div>
-                -->
-                <h4>Using multiple input nodes</h4>
-                Some actions require multiple input nodes (e.g. egg and butter). It takes several steps as below.
-                    <img class='centered' src='images/suggestion_2way.png' width="700px"></img>
-
-                <h4>Using demonstration</h4>
-
-
 
 
 
@@ -362,13 +374,32 @@
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=calculation1">Start Task</button></p>
 
                 How did you do the task? Let's learn how to use the two methods for the task.    
-                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='calculation'>Show instruction</button>
-                <div class='instruction hidden' role='calculation'>
+                <!--<button type="button" class="centered btn btn-success btn-lg button-instruction" target='calculation'>Show instruction</button>-->
+                <div class='instruction' role='calculation'>
                     <!-- INSTRUCTION = CALCULATION START -->
-                    <h4>Direct specification</h4>                    
-                        <img class="centered" src="images/inst_calculation_direct.png">
-                    <h4>Generator</h4>
-                        <img class="centered" src="images/inst_calculation_gen.png">
+                    <div class='manual'>
+                        <h5>Manual</h5>                
+                        <p>All the calculations in the task can be done with single operations (e.g. Arithmetic, Sort, and Count). 
+                        <ol>
+                            <li>Drag an appropriate operation to below or right to the input nodes. </li>
+                            <li>Modify the parameters as shown in the following examples. </li>
+                        </ol>
+                        </p>       
+                        <img src="images/calculation-manual-1.png" style='width:390px; vertical-align:top;'>
+                        <img src="images/calculation-manual-2.png" style='width:390px; vertical-align:top;'>
+                    </div>
+                    <div class='automatic'>
+                        <h5>Automatic</h5>
+                        <ol>
+                            <li><b>Create an empty node</b> below or right to the input node.</li>
+                            <li><b>Type node values</b> that you want to get. </li> 
+                            <li><b>Confirm a correct action</b> in the action panel.</li>
+                        </ol>
+                        <div style='max-height:400px; overflow:scroll; border:1px solid #aaa;'>
+                            <h6>Examples</h6>
+                            <img class="centered" src="images/calculation-auto-1.png" style='border:none'/>
+                        </div>
+                    </div>
                     <!-- INSTRUCTION = CALCULATION END -->
                 </div>
                 </p>
@@ -385,14 +416,51 @@
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction1">Start Task</button></p>
 
                 How did you do the task? Let's learn how to use the two methods for the task.    
-                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='extraction'>Show instruction</button>
-                <div class='instruction hidden' role='extraction'>
-                instruction for calculating number tasks
+
+                <!--<button type="button" class="centered btn btn-success btn-lg button-instruction" target='extraction'>Show instruction</button>-->
+                <div class='instruction' role='extraction'>
+                    <div class='manual'>
+                        <h5>Manual</h5>                
+                        Web elements contain many kinds of attributes. For example, a hyperlink element may contain <em>text</em>, <em>download</em>, <em>visibility</em>, <em>color</em>, <em>background-color</em>, <em>link</em>, and more. To maually extract attributes from elements, follow the steps below. 
+                        <ol>
+                            <li><b>Drag [Get Attribute] operation</b> from the action panel to the below of the input node.</li>
+                            <li><b>Change the parameter</b> to the attribute key that you want to extract.</li>
+                        </ol>
+                            <img class="centered borderless" src='images/extraction-manual-1.png' width="700"/>
+                        If you need to get attributes from sub-elements within the input, you might need to extract the sub-elements first (see <em>Element Inspector</em> chapter for detail), and then get attributes.    
+                            <img class="centered borderless" src='images/extraction-manual-2.png' width="700"/>
+                        What if you want to find other elements next to the input elements? You can reach parent elements first, and then extract the target elements. See the following example.   
+                            <img class="centered borderless" src='images/extraction-manual-3.png'/>
+                        Try task using the manual method explained above. 
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction2">Start Task</button>
+                    </div>
+                    <div class='automatic'>
+                        <h5>Automatic</h5>    
+                        Same as calculation tasks, you can provide desired values and get suggestions. Providing values is even easier with the click-to-copy functionality.     
+                        <ol>
+                        <li><b>Create an empty node</b> below the input node containing some elements (e.g. IMG tag in the figure below). You can see some elements in the node detail UI.</li>
+                                <img class="centered" src='images/extraction-auto-1.png' width="700"/>
+                            <li>If you want to get 'source' attribute, put mouse cursor over the source attribute and press <i class="fa fa-sign-out" style="color:red;"></i> button. It will add the attribute value to the current node value.</li>
+                                <img class="centered" src='images/extraction-auto-2.png' width="700"/>
+                            <li>Then the tools panel would suggest an action of [Get Attribute]. Click to confirm the action. </li>
+                                <img class="centered" src='images/extraction-auto-3.png'/>
+                            <li>Now the second node has the operation for getting 'color' attributes from input1.</li>
+                                <img class="centered" src='images/extraction-auto-4.png' width="700"/>
+                        </ol>
+                        <br/>
+                        If you need to get attributes from sub-elements within the input, you can simply provide examples of the attribute as illustrated below.
+                            <img class="centered" src='images/extraction-auto-5.png' width="700"/>
+                        <br/>
+                        What if you want to find other elements next to the input elements? You can simply provide examples of the target elements as illustrated below.
+                            <img class="centered" src='images/extraction-auto-6.png' width="700"/>
+                        Try task using the automatic method explained above. 
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction3">Start Task</button>
+                    </div>
                 </div>
                 </p>
                 <p>
-                Repeat the task. This time you decide the most efficient method for each problem. 
-                <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction1">Start Task</button></p>
+                Repeat the task. This time you can use the most efficient method for each problem. 
+                <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction4">Start Task</button></p>
                 </p>
 
             </div>
@@ -402,8 +470,8 @@
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=filter1">Start Task</button></p>
 
                 How did you do the task? Let's learn how to use the two methods for the task.    
-                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='filter'>Show instruction</button>
-                <div class='instruction hidden' role='filter'>
+                <!--<button type="button" class="centered btn btn-success btn-lg button-instruction" target='filter'>Show instruction</button>-->
+                <div class='instruction' role='filter'>
                 instruction for calculating number tasks
                 </div>
                 </p>
@@ -419,8 +487,8 @@
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=attach1">Start Task</button></p>
 
                 How did you do the task? Let's learn how to use the two methods for the task.    
-                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='attach'>Show instruction</button>
-                <div class='instruction hidden' role='attach'>
+                <!--<button type="button" class="centered btn btn-success btn-lg button-instruction" target='attach'>Show instruction</button>-->
+                <div class='instruction' role='attach'>
                 instruction for calculating number tasks
                 </div>
                 </p>
@@ -434,8 +502,8 @@
                 Try the task before seeing the instruction and examples. 
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task-students.html?task=modify1">Start Task</button></p>
                 How did you do the task? Let's learn how to use the two methods for the task.    
-                <button type="button" class="centered btn btn-success btn-lg button-instruction" target='modify'>Show instruction</button>
-                <div class='instruction hidden' role='modify'>
+                <!--<button type="button" class="centered btn btn-success btn-lg button-instruction" target='modify'>Show instruction</button>-->
+                <div class='instruction' role='modify'>
                 instruction for calculating number tasks
                 </div>
                 </p>
@@ -449,6 +517,7 @@
             <script>
                 $("document").ready(function(){
                     $("button.button-task").click(function() {
+                        var task_button  = this;
                         var subject_name = $("input#subject_name").val();
                         if(!subject_name) {
                             alert("Subject name is missing. Please fill in the name input box at the top.");
@@ -456,6 +525,14 @@
                                 scrollTop: 0
                             },500);
                             $("input#subject_name").css('background','rgba(255,0,0,0.3').focus();
+                            var return_button = $("<button type='button' class='btn btn-warning'>Return to the task</button>").
+                            click($.proxy(function() {
+                                $("html, body").animate({
+                                    scrollTop:$(this.task_button).offset().top-200
+                                },500);
+                                $(this).remove();
+                            },{task_button:task_button}));
+                            $("input#subject_name").after(return_button);
                             return;
                         }
                         var task = $(this).attr("task");
