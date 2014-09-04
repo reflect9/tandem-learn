@@ -472,8 +472,30 @@
                 How did you do the task? Let's learn how to use the two methods for the task.    
                 <!--<button type="button" class="centered btn btn-success btn-lg button-instruction" target='filter'>Show instruction</button>-->
                 <div class='instruction' role='filter'>
-                instruction for calculating number tasks
-                </div>
+                    <!--  MANUAL  -->
+                    <div class='manual'>
+                        <h5>Manual</h5>                
+                        In order to filter items by arbitrary logic, you can use [Filter] operation. [Filter] operation accepts two inputs, 1) original list of items, 2) a list of boolean values that indicate whether corresponding items will stay in the filtered list. 
+                            <img class="centered" src='images/filter-1.png' width="700"/>
+                        The following example describes filtering text with a static keyword - "apple". Filtering numbers is the same except you use [Number Test] instead of [String Test].
+                            <img class="centered" src='images/filter-manual-1.png' width="700"/>
+                        <!-- Manual Exercise -->
+                        Try task using the manual method explained above. 
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction2">Start Task</button>
+                    </div>
+                    <!--  AUTOMATIC  -->
+                    <div class='automatic'>
+                        <h5>Automatic</h5>    
+                        Same as the previous tasks, you can provide a filtered list and get a completed filtering action. Creating filtered list is even easier with the click-to-copy functionality.     
+                            <img class="centered" src='images/filter-automatic-1.png' width="700"/>
+                        <!-- Automatic Exercise -->
+                        Try task using the automatic method explained above. 
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction3">Start Task</button>
+                    </div> <!-- END OF AUTOMATIC  -->
+
+
+
+                </div> <!-- end of instruction -->
                 </p>
                 <p>
                 Repeat the task. This time you decide the most efficient method for each problem. 
