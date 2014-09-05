@@ -331,32 +331,28 @@
                     Let's learn how to get suggested actions in Tandem.    
                     <h4>Using a single input node</h4>
                         <img class="centered" src="images/suggestion.png" width="700px"/>
-                    <!--
-                    <h4>0-input node cases</h4>
-                    <div>
-                    When there is no input, the generator would think that you want to create constant values or extract those elements from the current page. As illustrated below, Tandem (1) suggests an action that creates the value, 2) user confirms the action to be the current node's operation, and executes the operation to update the node value.  
-                        <img class="centered" src="images/suggestion_0_input.png" width="600px"/>
-                    </div>
-                    
-
-                    <h4>1-input node cases</h4>
-                    <div>
-                        When there is 1 input node, the generator tries to find possible <b>linear transformations that can convert the input values to the current node values</b>. The figure below illustrates finding sub-elements from elements of the input node.     
-                         <img class="centered" src="images/suggestion_1_input_1.png" width="700px"/>
-                    Notice that even if the current value only provides the example for the first item,the generator is still able to suggest the correct action for the rest items. The figure below illustrates more patterns of element-to-element transformation.
-                        <img class="centered" src="images/suggestion_1_input_2.png" width="700px"/>
-
-                    Other types of node values yield a variety of suggestions.  
-                        <img class="centered" src="images/suggestion_1_input_3.png" width="700px"/>
-                    </div>
-                    -->
                     <h4>Using multiple input nodes</h4>
                     Some actions require multiple input nodes (e.g. egg and butter). It takes several steps as below.
                         <img class='centered' src='images/suggestion_2way.png' width="700px"/>
-
                     <h4>Using demonstration</h4>
+                    Sometimes <em>What you want to do</em> can be easily expressed by demonstration.
+
+                    <h5>Attaching elements to the page</h5>
+                    For example, to attach some elements to the current web page, you can <em>drag-and-drop the elements to the target positions</em>. 
+                        <img class='centered' src='images/suggestion_demo_0.png' width="500px"/>
+                        
+                    <h5>Modifying elements in the page</h5>
+                    If you want to modify attributes of elements in the page, you can directly demonstrate it by selecting and modifying their attributes with the Element Inspector.   
+                        <img class='centered' src='images/suggestion_demo_1.png' width="700px"/>
+
+
                 </div>
             </div>
+
+
+
+
+
 
 
 
@@ -387,6 +383,8 @@
                         </p>       
                         <img src="images/calculation-manual-1.png" style='width:390px; vertical-align:top;'>
                         <img src="images/calculation-manual-2.png" style='width:390px; vertical-align:top;'>
+                        Try task using the manual method explained above. 
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=calculation2">Start Task</button>
                     </div>
                     <div class='automatic'>
                         <h5>Automatic</h5>
@@ -399,13 +397,15 @@
                             <h6>Examples</h6>
                             <img class="centered" src="images/calculation-auto-1.png" style='border:none'/>
                         </div>
+                        Try task using the manual method explained above. 
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=calculation3">Start Task</button>
                     </div>
                     <!-- INSTRUCTION = CALCULATION END -->
                 </div>
                 </p>
                 <p>
-                Repeat the task. This time you decide the most efficient method for each problem. 
-                <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=calculation1">Start Task</button>
+                Make sure you understand both methods. Which method was easier and more efficient for the tasks? Answer questions in the following survey.
+                <button type="button" class="centered btn btn-warning btn-lg button-task" task="task.html?task=calculation1?survey">Open Survey</button>
                 </p>
 
             </div>
@@ -459,8 +459,8 @@
                 </div>
                 </p>
                 <p>
-                Repeat the task. This time you can use the most efficient method for each problem. 
-                <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction4">Start Task</button></p>
+                Make sure you understand both methods. Which method was easier and more efficient for the tasks? Answer questions in the following survey.
+                <button type="button" class="centered btn btn-warning btn-lg button-task" task="task.html?task=extraction1?survey">Open Survey</button>
                 </p>
 
             </div>
@@ -475,22 +475,23 @@
                     <!--  MANUAL  -->
                     <div class='manual'>
                         <h5>Manual</h5>                
-                        In order to filter items by arbitrary logic, you can use [Filter] operation. [Filter] operation accepts two inputs, 1) original list of items, 2) a list of boolean values that indicate whether corresponding items will stay in the filtered list. 
+                        In order to filter items by arbitrary logic, you use [Filter] operation. [Filter] operation needs two inputs, 1) <span style='color:orange;'>original list</span> of items, 2) <span style='color:green;'>boolean values</span> that indicate whether corresponding items will stay in the <span style='color:blue;'>filtered list</span>. 
                             <img class="centered" src='images/filter-1.png' width="700"/>
-                        The following example describes filtering text with a static keyword - "apple". Filtering numbers is the same except you use [Number Test] instead of [String Test].
-                            <img class="centered" src='images/filter-manual-1.png' width="700"/>
+                        Let's filter a text list by whether they contain "apple". 
+                            <img class="centered" src='images/filter-manual-1.png' width="600"/>
+                        Filtering numbers is the same except you use [Number Test] instead of [String Test].<br>
                         <!-- Manual Exercise -->
                         Try task using the manual method explained above. 
-                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction2">Start Task</button>
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=filter2">Start Task</button>
                     </div>
                     <!--  AUTOMATIC  -->
                     <div class='automatic'>
                         <h5>Automatic</h5>    
-                        Same as the previous tasks, you can provide a filtered list and get a completed filtering action. Creating filtered list is even easier with the click-to-copy functionality.     
-                            <img class="centered" src='images/filter-automatic-1.png' width="700"/>
+                        Same as the other tasks, you can provide a desired outcome (filtered items) to get a complete filtering action.  
+                            <img class="centered" src='images/filter-auto-1.png' width="700"/>
                         <!-- Automatic Exercise -->
                         Try task using the automatic method explained above. 
-                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction3">Start Task</button>
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=filter3">Start Task</button>
                     </div> <!-- END OF AUTOMATIC  -->
 
 
@@ -498,44 +499,61 @@
                 </div> <!-- end of instruction -->
                 </p>
                 <p>
-                Repeat the task. This time you decide the most efficient method for each problem. 
-                <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=filter2" material=''>Start Task</button></p>
+                Make sure you understand both methods. Which method was easier and more efficient for the tasks? Answer questions in the following survey.
+                <button type="button" class="centered btn btn-warning btn-lg button-task" task="task.html?task=filter1?survey">Open Survey</button>
                 </p>
 
             </div>
             <div class="chapter">
                 <h3>4.Attaching Elements</h3>
                 Try the task before seeing the instruction and examples. 
-                <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=attach1">Start Task</button></p>
-
+                <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=attach1">Start Task</button>
                 How did you do the task? Let's learn how to use the two methods for the task.    
                 <!--<button type="button" class="centered btn btn-success btn-lg button-instruction" target='attach'>Show instruction</button>-->
-                <div class='instruction' role='attach'>
-                instruction for calculating number tasks
-                </div>
-                </p>
+                <div class='instruction' role='filter'>
+                    <!--  MANUAL  -->
+                    <div class='manual'>
+                        <h5>Manual</h5>                
+                        In order to attach items to current page, you use [Attach Element] operation. [Attach Element] operation needs two inputs, 1) <span style='color:orange;'>Elements to attach</span>, 2) <span style='color:green;'>target elements</span>. 
+                        
+                        <!-- Manual Exercise -->
+                        Try task using the manual method explained above. 
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=attach2">Start Task</button>
+                    </div>
+                    <!--  AUTOMATIC  -->
+                    <div class='automatic'>
+                        <h5>Automatic</h5>    
+                        Unlike the other tasks, attaching elements can be demonstrated instead of giving example values. For example, in order to attach some elements to the current web page, you can drag-and-drop the elements to the target position as shown below.   
+                            <img class='centered borderless' src='images/attach-auto-1.png' width="700px"/>
+                            <img class='centered borderless' src='images/attach-auto-2.png' width="700px"/>
+
+                        <!-- Automatic Exercise -->
+                        Try task using the automatic method explained above. 
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=attach3">Start Task</button>
+                    </div> <!-- END OF AUTOMATIC  -->
+                </div> <!-- end of instruction -->
                 <p>
-                Repeat the task. This time you decide the most efficient method for each problem. 
-                <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=attach2">Start Task</button>
+                Make sure you understand both methods. Which method was easier and more efficient for the tasks? Answer questions in the following survey.
+                <button type="button" class="centered btn btn-warning btn-lg button-task" task="task.html?task=attach1?survey">Open Survey</button>
                 </p>
             </div>
+            <!--
             <div class="chapter">
                 <h3>5.Modifying Elements</h3>
                 Try the task before seeing the instruction and examples. 
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task-students.html?task=modify1">Start Task</button></p>
                 How did you do the task? Let's learn how to use the two methods for the task.    
-                <!--<button type="button" class="centered btn btn-success btn-lg button-instruction" target='modify'>Show instruction</button>-->
                 <div class='instruction' role='modify'>
                 instruction for calculating number tasks
                 </div>
                 </p>
                 <p>
-                Repeat the task. This time you decide the most efficient method for each problem. 
+                Make sure you understand both methods. Answer to the following questions about your experience .
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task-students.html?task=modify2">Start Task</button>
                 </p>
 
             </div>
-
+            -->
             <script>
                 $("document").ready(function(){
                     $("button.button-task").click(function() {
