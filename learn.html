@@ -20,6 +20,7 @@
     $(document).ready(function() {
         if(window.location.search.match(/modeB/)!=null) {
             // make manual first, automatic second
+            which_mode_first = "automatic"; 
             $.each($("div.manual"), function(i,manual_el) {
                 var auto_el= $(manual_el).parent().find("div.automatic");
                 $(manual_el).appendTo($(auto_el).parent());
@@ -27,9 +28,40 @@
             generate_sidebar();
             $(".navbar-brand").find(".mode").text("mode B");
         } else {
+            which_mode_first = "manual"; 
             $(".navbar-brand").find(".mode").text("mode A");
         }
+
+        $("button.button-task").click(function() {
+            var task_button  = this;
+            var subject_name = $("input#subject_name").val();
+            if(!subject_name) {
+                alert("Subject name is missing. Please fill in the name input box at the top.");
+                $("html, body").animate({
+                    scrollTop: 0
+                },500);
+                $("input#subject_name").css('background','rgba(255,0,0,0.3').focus();
+                var return_button = $("<button type='button' class='btn btn-warning'>Return to the task</button>").
+                click($.proxy(function() {
+                    $("html, body").animate({
+                        scrollTop:$(this.task_button).offset().top-200
+                    },500);
+                    $(this).remove();
+                },{task_button:task_button}));
+                $("input#subject_name").after(return_button);
+                return;
+            }
+            var task = $(this).attr("task");
+            window.open(task+"&name="+subject_name+"&which_mode_first="+which_mode_first,"tandem");
+        });
+        $("button.button-instruction").click(function() {
+            var target = $(this).attr("target");
+            $("div.instruction[role='"+target+"']").removeClass("hidden").show('slow');
+        });
+
+
     });
+
     </script>
 </head>
 
@@ -340,11 +372,11 @@
                     <h5>Attaching elements to the page</h5>
                     For example, to attach some elements to the current web page, you can <em>drag-and-drop the elements to the target positions</em>. 
                         <img class='centered' src='images/suggestion_demo_0.png' width="500px"/>
-                        
+                    <!--
                     <h5>Modifying elements in the page</h5>
                     If you want to modify attributes of elements in the page, you can directly demonstrate it by selecting and modifying their attributes with the Element Inspector.   
                         <img class='centered' src='images/suggestion_demo_1.png' width="700px"/>
-
+                    -->
 
                 </div>
             </div>
@@ -366,10 +398,12 @@
             </div>
             <div class="chapter">
                 <h3>1.Calculating Numbers</h3>
-                Try the task before seeing the instruction and examples. 
+                <!--Try the task before seeing the instruction and examples. 
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=calculation1">Start Task</button></p>
 
+
                 How did you do the task? Let's learn how to use the two methods for the task.    
+                -->
                 <!--<button type="button" class="centered btn btn-success btn-lg button-instruction" target='calculation'>Show instruction</button>-->
                 <div class='instruction' role='calculation'>
                     <!-- INSTRUCTION = CALCULATION START -->
@@ -384,7 +418,7 @@
                         <img src="images/calculation-manual-1.png" style='width:390px; vertical-align:top;'>
                         <img src="images/calculation-manual-2.png" style='width:390px; vertical-align:top;'>
                         Try task using the manual method explained above. 
-                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=calculation2">Start Task</button>
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=calculation1?mode=manual">Start Task</button>
                     </div>
                     <div class='automatic'>
                         <h5>Automatic</h5>
@@ -398,7 +432,7 @@
                             <img class="centered" src="images/calculation-auto-1.png" style='border:none'/>
                         </div>
                         Try task using the manual method explained above. 
-                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=calculation3">Start Task</button>
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=calculation2?mode=automatic">Start Task</button>
                     </div>
                     <!-- INSTRUCTION = CALCULATION END -->
                 </div>
@@ -412,10 +446,10 @@
 
             <div class="chapter">
                 <h3>2.Extracting Information</h3>
-                Try the task before seeing the instruction and examples. 
+                <!--Try the task before seeing the instruction and examples. 
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction1">Start Task</button></p>
-
                 How did you do the task? Let's learn how to use the two methods for the task.    
+                -->
 
                 <!--<button type="button" class="centered btn btn-success btn-lg button-instruction" target='extraction'>Show instruction</button>-->
                 <div class='instruction' role='extraction'>
@@ -432,7 +466,7 @@
                         What if you want to find other elements next to the input elements? You can reach parent elements first, and then extract the target elements. See the following example.   
                             <img class="centered borderless" src='images/extraction-manual-3.png'/>
                         Try task using the manual method explained above. 
-                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction2">Start Task</button>
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction1?mode=manual">Start Task</button>
                     </div>
                     <div class='automatic'>
                         <h5>Automatic</h5>    
@@ -454,7 +488,7 @@
                         What if you want to find other elements next to the input elements? You can simply provide examples of the target elements as illustrated below.
                             <img class="centered" src='images/extraction-auto-6.png' width="700"/>
                         Try task using the automatic method explained above. 
-                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction3">Start Task</button>
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=extraction2?mode=automatic">Start Task</button>
                     </div>
                 </div>
                 </p>
@@ -466,10 +500,11 @@
             </div>
             <div class="chapter">
                 <h3>3.Filtering items</h3>
-                Try the task before seeing the instruction and examples. 
+                <!--Try the task before seeing the instruction and examples. 
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=filter1">Start Task</button></p>
 
                 How did you do the task? Let's learn how to use the two methods for the task.    
+                -->
                 <!--<button type="button" class="centered btn btn-success btn-lg button-instruction" target='filter'>Show instruction</button>-->
                 <div class='instruction' role='filter'>
                     <!--  MANUAL  -->
@@ -482,7 +517,7 @@
                         Filtering numbers is the same except you use [Number Test] instead of [String Test].<br>
                         <!-- Manual Exercise -->
                         Try task using the manual method explained above. 
-                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=filter2">Start Task</button>
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=filter1?mode=manual">Start Task</button>
                     </div>
                     <!--  AUTOMATIC  -->
                     <div class='automatic'>
@@ -491,7 +526,7 @@
                             <img class="centered" src='images/filter-auto-1.png' width="700"/>
                         <!-- Automatic Exercise -->
                         Try task using the automatic method explained above. 
-                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=filter3">Start Task</button>
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=filter2?mode=automatic">Start Task</button>
                     </div> <!-- END OF AUTOMATIC  -->
 
 
@@ -506,19 +541,21 @@
             </div>
             <div class="chapter">
                 <h3>4.Attaching Elements</h3>
-                Try the task before seeing the instruction and examples. 
+                <!--Try the task before seeing the instruction and examples. 
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=attach1">Start Task</button>
                 How did you do the task? Let's learn how to use the two methods for the task.    
+                -->
                 <!--<button type="button" class="centered btn btn-success btn-lg button-instruction" target='attach'>Show instruction</button>-->
                 <div class='instruction' role='filter'>
                     <!--  MANUAL  -->
                     <div class='manual'>
                         <h5>Manual</h5>                
                         In order to attach items to current page, you use [Attach Element] operation. [Attach Element] operation needs two inputs, 1) <span style='color:orange;'>Elements to attach</span>, 2) <span style='color:green;'>target elements</span>. 
+                            <img class='centered borderless' src='images/attach-manual-1.png' width="700px"/>
                         
                         <!-- Manual Exercise -->
                         Try task using the manual method explained above. 
-                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=attach2">Start Task</button>
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=attach1?mode=manual">Start Task</button>
                     </div>
                     <!--  AUTOMATIC  -->
                     <div class='automatic'>
@@ -529,7 +566,7 @@
 
                         <!-- Automatic Exercise -->
                         Try task using the automatic method explained above. 
-                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=attach3">Start Task</button>
+                        <button type="button" class="centered btn btn-info btn-lg button-task" task="task.html?task=attach2?mode=automatic">Start Task</button>
                     </div> <!-- END OF AUTOMATIC  -->
                 </div> <!-- end of instruction -->
                 <p>
@@ -543,6 +580,7 @@
                 Try the task before seeing the instruction and examples. 
                 <button type="button" class="centered btn btn-info btn-lg button-task" task="task-students.html?task=modify1">Start Task</button></p>
                 How did you do the task? Let's learn how to use the two methods for the task.    
+                
                 <div class='instruction' role='modify'>
                 instruction for calculating number tasks
                 </div>
@@ -554,38 +592,6 @@
 
             </div>
             -->
-            <script>
-                $("document").ready(function(){
-                    $("button.button-task").click(function() {
-                        var task_button  = this;
-                        var subject_name = $("input#subject_name").val();
-                        if(!subject_name) {
-                            alert("Subject name is missing. Please fill in the name input box at the top.");
-                            $("html, body").animate({
-                                scrollTop: 0
-                            },500);
-                            $("input#subject_name").css('background','rgba(255,0,0,0.3').focus();
-                            var return_button = $("<button type='button' class='btn btn-warning'>Return to the task</button>").
-                            click($.proxy(function() {
-                                $("html, body").animate({
-                                    scrollTop:$(this.task_button).offset().top-200
-                                },500);
-                                $(this).remove();
-                            },{task_button:task_button}));
-                            $("input#subject_name").after(return_button);
-                            return;
-                        }
-                        var task = $(this).attr("task");
-                        window.open(task+"&name="+subject_name,"tandem");
-                    });
-                    $("button.button-instruction").click(function() {
-                        var target = $(this).attr("target");
-                        $("div.instruction[role='"+target+"']").removeClass("hidden").show('slow');
-                    });
-                
-                });
-                
-            </script>
 
                 <!--
 
