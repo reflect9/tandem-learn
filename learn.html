@@ -17,15 +17,42 @@
     <link rel="stylesheet" href="stylesheets/style.css">
 
     <script>
+    function increase_hint_used() {
+        hint_used = hint_used+1;
+        $("#num_hints_used").text(hint_used);
+    }
+
+    function openChapter(code) {
+        $(".main").find(".chapter").hide();
+        $(".main").find(".chapter[chapterCode='"+code+"']").show();
+    }
+
+    function generate_sidebar() {
+        var chapters = $('.main').find("h1,h3").toArray();
+        var sidebar = $("ul.nav-sidebar").empty();
+        $.each(chapters, function(i,ch) {
+            var title = $(ch).text();
+            var level = $(ch).prop('tagName');
+            $("<li level='"+level+"'>"+title+"</li>").click($.proxy(function() {
+                $('html, body').animate({
+                    scrollTop: ($(this.ch).offset().top-60)
+                },500);
+            },{ch:ch})).appendTo(sidebar);
+        });
+    }
+
     $(document).ready(function() {
+        $("ul.nav-sidebar").find('a').click(function() {
+            $("ul.nav-sidebar").find('li').removeClass("active");
+            $(this).parents("li").addClass("active");
+        });
+
         if(window.location.search.match(/modeB/)!=null) {
-            // make manual first, automatic second
             which_mode_first = "automatic"; 
-            $.each($("div.manual"), function(i,manual_el) {
-                var auto_el= $(manual_el).parent().find("div.automatic");
+            $.each($(".manual"), function(i,manual_el) {
+                var auto_el= $(manual_el).parent().find(".automatic");
                 $(manual_el).appendTo($(auto_el).parent());
             });
-            generate_sidebar();
             $(".navbar-brand").find(".mode").text("mode B");
         } else {
             which_mode_first = "manual"; 
@@ -54,11 +81,14 @@
             var task = $(this).attr("task");
             window.open(task+"&name="+subject_name+"&which_mode_first="+which_mode_first,"tandem");
         });
+
         $("button.button-instruction").click(function() {
             var target = $(this).attr("target");
             $("div.instruction[role='"+target+"']").removeClass("hidden").show('slow');
         });
 
+        generate_sidebar();
+        
 
     });
 
@@ -76,7 +106,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Learning Tandem - <span class='mode'></span></a>
+      <a class="navbar-brand" href="#">Learning VESPY - <span class='mode'></span></a>
     </div>
     
     <div class="navbar-collapse collapse">
@@ -96,32 +126,14 @@
         <div class="col-sm-3 col-md-2 sidebar">
 	      <ul class="nav nav-sidebar">
 	      </ul>
-            <script>
-            var generate_sidebar = function() {
-                var chapters = $('.main').find("h1,h3").toArray();
-                var sidebar = $("ul.nav-sidebar").empty();
-                $.each(chapters, function(i,ch) {
-                    var title = $(ch).text();
-                    var level = $(ch).prop('tagName');
-                    $("<li level='"+level+"'>"+title+"</li>").click($.proxy(function() {
-                        $('html, body').animate({
-                            scrollTop: ($(this.ch).offset().top-60)
-                        },500);
-                    },{ch:ch})).appendTo(sidebar);
-                });
-            }
-            $("document").ready(function() {
-                generate_sidebar();
-            });
-            </script>  
 	    </div>
 	    <!-- MAIN MATERIAL -->
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1>Tutorial</h1>
             <div class="chapter" chapterCode="intro" chapterType="both">
                 <h3>Introduction</h3>
-	    		<p>Welcome to Tandem!  
-				Tandem is a programming environment on the Web. It enables you to modify or add extra functionality to existing web pages. Here are some examples that enhancements can do: 
+	    		<p>Welcome to VESPY!  
+				VESPY is a programming environment on the Web. It enables you to modify or add extra functionality to existing web pages. Here are some examples that enhancements can do: 
                 <ul>
                     <li>Hide unwanted information such as advertisements.</li>
                     <li>Collect information from multiple web pages, and create custom reports.</li>
@@ -145,17 +157,17 @@
                     </script>
                 <div class='try'>
                     <span class="label label-warning try">Try</span>    
-                    <span class='main_task'>In the <em>practice window</em>, open Tandem UI by pressing <img src='images/tandem-mark.png'/>.</span>
+                    <span class='main_task'>In the <em>practice window</em>, open VESPY UI by pressing <img src='images/tandem-mark.png'/>.</span>
                     <div class='instruction'>  </div>
                 </div>
                 <!-- <img class="centered" src='images/panel_ui.png' width="500"/><br> -->
             </div>
             <div class="chapter" chapterCode="basicUsage"  chapterType="both">   
                 <h3>Basic Concepts & UI components</h3>
-                Let's begin with the terminology of Tandem programming. 
+                Let's begin with the terminology of VESPY programming. 
                 <ul class='list'>
                     <img class="centered" width="750px" src="images/terminology_all.png"/>    
-                    <li>An <b style='color:red;'>Enhancement</b> is an application created using Tandem. An enhancement consists of many nodes. The nodes are connected to each other, executed one-by-one, and passing values around.</li>
+                    <li>An <b style='color:red;'>Enhancement</b> is an application created using VESPY. An enhancement consists of many nodes. The nodes are connected to each other, executed one-by-one, and passing values around.</li>
                     <li><b style='color:red;'>Nodes</b> are placed on the grid UI. Each node contains an operation, a list of values, and is connected to one or multiple input nodes. </li>
                     <ul>
                         <li><b style='color:red;'>Operation</b> is what this node will do when being triggered. For example, the operation above multiplies the numbers of input 1 and input 2, and updates the node's value. Parameters such as <b>input 1</b>, <b>/</b>, <b>input 2</b> can be directly modified. You can drag new operations from the Actions panel.  </li>
@@ -170,7 +182,7 @@
                         </li>
                     </ul>
                     <li>The <b style="color:red;">Actions</b> panel shows the operations that you can create nodes with.   
-                        Tandem provides over 30 operations. In the tools panel, you can drag them to the grid. Four colors of the operations represent different roles they have. <br>
+                        VESPY provides over 30 operations. In the tools panel, you can drag them to the grid. Four colors of the operations represent different roles they have. <br>
                         <img class="centered" src='images/terminology_actions.png' width="300px;"/>    
                         <ul>
                         <li><span class='op' kind='pick'>Pick</span> operations select / find / load information from the Web. </li>
@@ -182,7 +194,7 @@
                     </li>
                 </ul>  
                 <div class="clear:both;"></div>
-                The following video will introduce the UI components of Tandem UI. You will also learn how to open browse, create, modify, and delete enhancements, and applying operations in the Actions panel to the grid UI.  
+                The following video will introduce the UI components of VESPY UI. You will also learn how to open browse, create, modify, and delete enhancements, and applying operations in the Actions panel to the grid UI.  
                 </div>
                 <!--
                 <div class='video'><OBJECT classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="720"
@@ -213,7 +225,7 @@
                 </div>
                 <div class='try'>
                     <span class="label label-warning try">Try</span>    
-                    <span class='main_task'>Rename the enhancement to "hello tandem".</span>
+                    <span class='main_task'>Rename the enhancement to "hello VESPY".</span>
                     <span class='show_hint'>Show Hint</span>
                     <div class='instruction hint'>
                         <ol>
@@ -227,7 +239,7 @@
                     <span class='main_task'>Create a few nodes by dragging from Actions panel or by clicking the grid.</span>
                     <span class='show_hint'>Show Hint</span>
                     <div class='instruction hint'>
-                        Tandem offers two options for creating new nodes. <br>
+                        VESPY offers two options for creating new nodes. <br>
                         <b>Option 1.</b> Drag an operation from the actions panel. 
                         <img class="centered" src='images/drag_node.png' width="400"/>
                         <b>Option 2.</b> Double-click an empty part of the grid to create an empty node. As the node does not have any operation or values, you should choose an action in the actions panel. <br>
@@ -304,15 +316,11 @@
                 <div class="video"><OBJECT classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="720"
                     height="450" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
                     <param name='src' value="videos/4_inspector.mp4
-                    ">
-                    <param name='autoplay' value="false">
-                    <param name='controller' value="true">
-                    <param name='loop' value="false">
-                    <EMBED src="videos/4_inspector.mp4
-                    " width="720" height="450" autoplay="false" scale="tofit"
-                    controller="true" loop="false" pluginspage='videos/4_inspector.mp4
-                    '>
-                    </EMBED>
+                    "/>
+                    <param name='autoplay' value="false"/>
+                    <param name='controller' value="true"/>
+                    <param name='loop' value="false"/>
+                    <EMBED src="videos/4_inspector.mp4" width="720" height="450" autoplay="false" scale="tofit" controller="true" loop="false" pluginspage='videos/4_inspector.mp4'></EMBED>
                 </OBJECT></div>
 
                 <br>The steps are <br>
@@ -331,36 +339,40 @@
             </div>
 
             <div class="chapter">   
-            Good job! You have finished learning the basic usage of Tandem. 
+            Good job! You have finished learning the basic usage of VESPY. 
             </div>
 
 
-            <!--            
-            ==========================================================================================
-            ==========================================================================================
-            ==========================================================================================
-            -->
+<!--
+            ####### #     # #######    #     # ####### ####### #     # ####### ######   #####  
+               #    #  #  # #     #    ##   ## #          #    #     # #     # #     # #     # 
+               #    #  #  # #     #    # # # # #          #    #     # #     # #     # #       
+               #    #  #  # #     #    #  #  # #####      #    ####### #     # #     #  #####  
+               #    #  #  # #     #    #     # #          #    #     # #     # #     #       # 
+               #    #  #  # #     #    #     # #          #    #     # #     # #     # #     # 
+               #     ## ##  #######    #     # #######    #    #     # ####### ######   #####  
+-->   
 
-            <h1 class='tandem-h1'>Two methods</h1>
+            <h1 class='VESPY-h1'>Two methods</h1>
             <div class="chapter" style="margin-top:0px;">   
-                Tandem offers two methods for specifying node operations. The first, <b>manual</b> method is to choose operations directly from the list and manually specify details. The second, <b>automatic</b> method suggests appropriate actions that correspond to current context (i.e. node values, recent mouse behaviors). Users choose either manual or automatic method for more efficient programming.
+                VESPY offers two methods for specifying node operations. The first, <b>manual</b> method is to choose operations directly from the list and manually specify details. The second, <b>automatic</b> method suggests appropriate actions that correspond to current context (i.e. node values, recent mouse behaviors). Users choose either manual or automatic method for more efficient programming.
             </div>
             
 
-            <!--<h1 class='tandem-h1'>Tutorial - B</h1>-->
+            <!--<h1 class='VESPY-h1'>Tutorial - B</h1>-->
             <div>
                 <div class="chapter manual" style="margin-top:0px;">   
                     <h3>Manual</h3>
-                    Tandem also allows traditional programming style. Users can <b>directly choose the operation</b> that they need, and <b>manually set the parameters</b>. 
+                    VESPY also allows traditional programming style. Users can <b>directly choose the operation</b> that they need, and <b>manually set the parameters</b>. 
                     <img class='centered' src='images/direct_specification.png' width="700px"/>
                 </div>
                 <div class="chapter automatic">   
                     <h3>Automatic</h3>
                     
-                    <p>Imagine a situation that you know <b>what to do</b> but have no idea of <b>how to do it</b>. Instead of searching the documentation, Tandem's generator allows you to <b style='color:red;'>express your intent with node values and demonstration</b>. It is like saying <blockquote>I have a <b>fresh egg, butter, and coconut</b> [input values]. <br> How can I bake delicious <b>macaroons</b> [desired outcome] with them?</blockquote>  
+                    <p>Imagine a situation that you know <b>what to do</b> but have no idea of <b>how to do it</b>. Instead of searching the documentation, VESPY's generator allows you to <b style='color:red;'>express your intent with node values and demonstration</b>. It is like saying <blockquote>I have a <b>fresh egg, butter, and coconut</b> [input values]. <br> How can I bake delicious <b>macaroons</b> [desired outcome] with them?</blockquote>  
                     </p>
                     
-                    Let's learn how to get suggested actions in Tandem.    
+                    Let's learn how to get suggested actions in VESPY.    
                     <h4>Using a single input node</h4>
                         <img class="centered" src="images/suggestion.png" width="700px"/>
                     <h4>Using multiple input nodes</h4>
@@ -391,11 +403,20 @@
 
             <div class="chapter" style="margin-top:150px;"> 
                 <h1 class="page-header">Tasks</h1>
-                You have learned the very basic usage and two methods for creating operations in Tandem. Let's learn five types of common tasks. 
+                You have learned the very basic usage and two methods for creating operations in VESPY. Let's learn five types of common tasks. 
 
                 <br>We prepared several problems for each task type. First, you will try to solve them without any instruction. After the first trial, we will be given some instruction and examples. Then you will try the task again.  
                 
             </div>
+<!--
+               #           #####     #    #        #####  #     # #       
+              ##          #     #   # #   #       #     # #     # #       
+             # #          #        #   #  #       #       #     # #       
+               #          #       #     # #       #       #     # #       
+               #   ###    #       ####### #       #       #     # #       
+               #   ###    #     # #     # #       #     # #     # #       
+             ##### ###     #####  #     # #######  #####   #####  ####### 
+-->              
             <div class="chapter">
                 <h3>1.Calculating Numbers</h3>
                 <!--Try the task before seeing the instruction and examples. 
@@ -443,7 +464,15 @@
                 </p>
 
             </div>
-
+<!--
+             #####         ####### #     # ####### ######     #     #####  ####### 
+            #     #        #        #   #     #    #     #   # #   #     #    #    
+                  #        #         # #      #    #     #  #   #  #          #    
+             #####         #####      #       #    ######  #     # #          #    
+            #       ###    #         # #      #    #   #   ####### #          #    
+            #       ###    #        #   #     #    #    #  #     # #     #    #    
+            ####### ###    ####### #     #    #    #     # #     #  #####     #    
+-->  
             <div class="chapter">
                 <h3>2.Extracting Information</h3>
                 <!--Try the task before seeing the instruction and examples. 
@@ -498,6 +527,15 @@
                 </p>
 
             </div>
+<!--
+             #####            #######                              
+            #     #           #       # #      ##### ###### #####  
+                  #           #       # #        #   #      #    # 
+             #####            #####   # #        #   #####  #    # 
+                  # ###       #       # #        #   #      #####  
+            #     # ###       #       # #        #   #      #   #  
+             #####  ###       #       # ######   #   ###### #    # 
+-->            
             <div class="chapter">
                 <h3>3.Filtering items</h3>
                 <!--Try the task before seeing the instruction and examples. 
@@ -539,6 +577,15 @@
                 </p>
 
             </div>
+<!--
+            #                 #    ####### #######    #     #####  #     # 
+            #    #           # #      #       #      # #   #     # #     # 
+            #    #          #   #     #       #     #   #  #       #     # 
+            #    #         #     #    #       #    #     # #       ####### 
+            ####### ###    #######    #       #    ####### #       #     # 
+                 #  ###    #     #    #       #    #     # #     # #     # 
+                 #  ###    #     #    #       #    #     #  #####  #     # 
+-->
             <div class="chapter">
                 <h3>4.Attaching Elements</h3>
                 <!--Try the task before seeing the instruction and examples. 
@@ -574,395 +621,70 @@
                 <button type="button" class="centered btn btn-warning btn-lg button-task" task="task.html?task=attach1?survey">Open Survey</button>
                 </p>
             </div>
-            <!--
-            <div class="chapter">
-                <h3>5.Modifying Elements</h3>
-                Try the task before seeing the instruction and examples. 
-                <button type="button" class="centered btn btn-info btn-lg button-task" task="task-students.html?task=modify1">Start Task</button></p>
-                How did you do the task? Let's learn how to use the two methods for the task.    
-                
-                <div class='instruction' role='modify'>
-                instruction for calculating number tasks
-                </div>
-                </p>
-                <p>
-                Make sure you understand both methods. Answer to the following questions about your experience .
-                <button type="button" class="centered btn btn-info btn-lg button-task" task="task-students.html?task=modify2">Start Task</button>
-                </p>
-
-            </div>
-            -->
-
-                <!--
-
-                <ol>
-                    <li>Create an empty node (A).
-                        <img class='centered' src='images/generating_action_1.png' width="100px"></img>
-                    </li>
-                    <li>By default, newly created nodes take input nodes from above and left. Create input nodes B and C above and/or left side of the node.    
-                    <img class='centered' src='images/generating_action_2.png' width="100px"></img>
-                    Otherwise, if B and C need to be at other places, you can manually connect A's inputs to them. Press <i class="fa fa-crosshairs"></i> and click the node that you want to set as an input node. The following video demonstrates it. 
-                        
-                        <div class='video'><OBJECT classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="720"
-                            height="450" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
-                            <param name='src' value="videos/gen_oper_1.mp4
-                            ">
-                            <param name='autoplay' value="false">
-                            <param name='controller' value="true">
-                            <param name='loop' value="false">
-                            <EMBED src="videos/gen_oper_1.mp4
-                            " width="540" height="338" autoplay="false" scale="tofit"
-                            controller="true" loop="false" pluginspage='videos/gen_oper_1.mp4
-                            '>
-                            </EMBED>
-                        </OBJECT></div> ]
-                    </li>
-                    <li>Make sure that the input nodes contain values that the operation will use. For example, to create a [Arithmetic] operation both input nodes must contain number values. Let's put [1,2,3] in B, and [4] in C.
-                    <img class='centered' src='images/generating_action_3.png' width="150px"></img>
-                    </li>
-                    <li>In the node A, manually put the values that you want to get. For example, if you want to multiply [1,2,3] by [4], then you put [4,8,12] in A.
-                    <img class='centered' src='images/generating_action_4.png' width="150px"></img>
-                    </li>
-                    <li>The Action panel will show suggested actions that return 6 using 1,2,3 as input parameters.<img class='centered' src='images/generating_action_5.png'></img>
-                    </li> 
-                    <li>Click the action. The node A will now have the correct operation. Now the node A should look like below. 
-                    <img class='centered' src='images/generating_action_6.png' width="700px"></img>
-                    </li> 
-                    <li>Done!</li>
-                </ol> 
-                -->
-                <!--
-                Watch the following video of building a simple enhancement that can calculate the average of given numbers.      
-                
-                 <div class='video'><OBJECT classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="720"
-                    height="450" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
-                    <param name='src' value="videos/2_generating_operations.mp4
-                    ">
-                    <param name='autoplay' value="false">
-                    <param name='controller' value="true">
-                    <param name='loop' value="false">
-                    <EMBED src="videos/2_generating_operations.mp4
-                    " width="720" height="450" autoplay="false" scale="tofit"
-                    controller="true" loop="false" pluginspage='videos/2_generating_operations.mp4
-                    '>
-                    </EMBED>
-                </OBJECT></div>
-                -->
-
-                <!--
-                <h3>Capability of the inference engine</h3>
-                While other languages require programmers to learn the full usage of commands, Tandem users should learn the capability of the genereator. The <a>reference section</a> shows the full capability of the inference engine in Tandem. The following table shows a few example cases when both input and node values are numbers.     
-                    <div><center><table class='table table-bordered generation_examples' style="width:700px">
-                        <thead>
-                        <tr><th>Input1</th><th>Input2</th><th>Current node values</th><th>Suggested Actions</th></tr>
-                        </thead>
-                        <tr>
-                          <td>1,2,3</td>
-                          <td></td> 
-                          <td>2,4,6</td>
-                          <td>  
-                            <ul class="task_list"><li class="task_item draggableItem" mode="big"><ul class="sub_op"><li class="sub_op_item" kind="transform" type="arithmetic">     <div class="op_icon"><i class="fa fa-columns fa-lg"></i></div>      <div class="op_type unselectable">Arithmetic</div>      <div class="op_description unselectable"><span>Calculate <span class="param" paramvalue="input1" paramkey="operand_A">input1</span> <span class="param" paramvalue="*" paramkey="operator">*</span> <span class="param" paramvalue="2" paramkey="operand_B">2</span></span></div>       <div class="op_actions"></div>  </li></ul><label class="simple insert_task">Apply to current node</label></li><li class="task_item draggableItem" mode="big"><ul class="sub_op"><li class="sub_op_item" kind="transform" type="arithmetic">     <div class="op_icon"><i class="fa fa-columns fa-lg"></i></div>      <div class="op_type unselectable">Arithmetic</div>      <div class="op_description unselectable"><span>Calculate <span class="param" paramvalue="input1" paramkey="operand_A">input1</span> <span class="param" paramvalue="/" paramkey="operator">/</span> <span class="param" paramvalue="0.5" paramkey="operand_B">0.5</span></span></div>       <div class="op_actions"></div>  </li></ul><label class="simple insert_task">Apply to current node</label></li></ul>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>1,2,3</td>
-                          <td>4</td> 
-                          <td>4,8,12</td>
-                          <td>
-                            <ul class="task_list"><li class="task_item draggableItem" mode="big"><ul class="sub_op"><li class="sub_op_item" kind="transform" type="arithmetic">     <div class="op_icon"><i class="fa fa-columns fa-lg"></i></div>      <div class="op_type unselectable">Arithmetic</div>      <div class="op_description unselectable"><span>Calculate <span class="param" paramvalue="input1" paramkey="operand_A">input1</span> <span class="param" paramvalue="*" paramkey="operator">*</span> <span class="param" paramvalue="input2" paramkey="operand_B">input2</span></span></div>     <div class="op_actions"></div>  </li></ul><label class="simple insert_task">Apply to current node</label></li></ul>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>1,2,3</td>
-                          <td></td> 
-                          <td>3</td>
-                          <td>
-                              <ul class="task_list"><li class="task_item draggableItem" mode="big"><ul class="sub_op"><li class="sub_op_item" kind="transform" type="number_test">      <div class="op_icon"><i class="fa fa-columns fa-lg"></i></div>      <div class="op_type unselectable">Number Test</div>     <div class="op_description unselectable"><span>Evaluate <span class="param" paramvalue="input1" paramkey="operand_A">input1</span> <span class="param" paramvalue=">" paramkey="operator">&gt;</span> <span class="param" paramvalue="2" paramkey="operand_B">2</span>.</span></div>        <div class="op_actions"></div>  </li><li class="sub_op_item" kind="transform" type="filter">        <div class="op_icon"><i class="fa fa-filter fa-lg"></i></div>       <div class="op_type unselectable">Filter</div>      <div class="op_description unselectable"><span>Filter items in <span class="param" paramvalue="input1" paramkey="items">input1</span> by <span class="param" paramvalue="true" paramkey="true_or_false">true</span> of <span class="param" paramvalue="input2" paramkey="booleans">input2</span>.</span></div>      <div class="op_actions"></div>  </li></ul><label class="simple insert_task">Apply to current node</label></li><li class="task_item draggableItem" mode="big"><ul class="sub_op"><li class="sub_op_item" kind="transform" type="count">      <div class="op_icon"><i class="fa fa-list-ol fa-lg"></i></div>      <div class="op_type unselectable">Count</div>       <div class="op_description unselectable"><span>Count <span class="param" paramvalue="input1" paramkey="source">input1</span>.</span></div>      <div class="op_actions"></div>  </li></ul><label class="simple insert_task">Apply to current node</label></li></ul>
-
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>1,2,3</td>
-                          <td></td> 
-                          <td>6</td>
-                          <td>
-                             <ul class="task_list"><li class="task_item draggableItem" mode="big"><ul class="sub_op"><li class="sub_op_item" kind="transform" type="sum">        <div class="op_icon"><i class="fa fa-list-ol fa-lg"></i></div>      <div class="op_type unselectable">Sum</div>     <div class="op_description unselectable"><span>Add all numbers in <span class="param" paramvalue="input1" paramkey="source">input1</span>.</span></div>     <div class="op_actions"></div>  </li></ul><label class="simple insert_task">Apply to current node</label></li></ul>
-                          </td>
-                        </tr>
-                    </table></center></div>
-
-                <div class='try'>
-                    <span class="label label-warning try">Try</span>    
-                    <span class='main_task'>Make a module that filters out negative numbers in a list. E.g. [1,-3,5,-2]=>[1,5]</span>
-                    <span class='show_hint'>Show Hint</span>
-                    <div class='instruction hint'>
-                        <ol>
-                        <li>Create an empty node (A) and type in [1,-3,5,-2].</li>
-                        <li>Create an empty node (B) below (A) and type in [1,5].
-                        <img class="centered" src="images/gen_action_eg_1.png"/>
-                        </li>
-                        <li>When (B) is selected, the actions panel would suggeste an action of [Number Test >  Filter]. The action tests whether each number in (A) is equal or greater than 1, and takes only items that passed the test.   
-                            <img class='centered' src='images/generating_action_pr_1.png' ></img></li>
-                        <li>As you click the action, two nodes will be inserted below (A). Although the final outcome is correct, the logic will not pass 0, which is a non-negative number but still less than 1. Click the middle node and fix the parameter to 0.
-                            <img class='centered' src='images/generating_action_pr_2.png' width="700px"></img></li>
-                        </ol>
-                    </div>
-                </div>
-            </div>-->
-            <!--
-            <div class="chapter"> 
-                <h3>Choosing operations from Tools panel</h3>
-                <img src='images/tools.png' style="float:left;"/>
-                <div style="float:right; width:490px;">
-                    Tandem provides over 30 operations. In the tools panel, you can drag them to the grid. Four colors of the operations represent different roles they have. <br>
-                    <ul>
-                    <li><span class='op' kind='pick'>Pick</span> operations select / find / load information from the Web. </li>
-                    <li><span class='op'  kind='transform'>Transform</span> operations do value-to-value conversion. </li>
-                    <li><span class='op' kind='apply'>Apply</span> operations customize existing Web pages by hiding / changing / attaching new elements. </li>
-                    <li><span class='op' kind='flow'>Control</span> operations manage program structure such as event handling. </li>
-                    </ul>
-                    Clicking an operation will show brief description of its functionality. Further details of each operation is available at the reference page.   
-                </div>
-                <div style="clear:both;"></div>
-            </div>
-            -->
             
-            
-            <!--
-            <div class="chapter"> 
-                <h3>Practice: Calculating the average</h3>
-                This video will show how to create a simple module of four nodes that calculates the average value of given numbers.
-                
-                <div class="video"><OBJECT classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="720"
-                    height="450" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
-                    <param name='src' value="videos/3_getting_average-sym.mp4
-                    ">
-                    <param name='autoplay' value="false">
-                    <param name='controller' value="true">
-                    <param name='loop' value="false">
-                    <EMBED src="videos/3_getting_average-sym.mp4
-                    " width="720" height="450" autoplay="false" scale="tofit"
-                    controller="true" loop="false" pluginspage='videos/3_getting_average-sym.mp4
-                    '>
-                    </EMBED>
-                </OBJECT></div>
-                
-                <div class='try'>
-                    <span class="label label-warning try">Try</span>    
-                    <span class='main_task'>Finish watching the video, and follow the same steps to build a module that calculates the average of given numbers.</span>
-                    <div class='instruction'>
-                         The steps are <br>
-                        <ol>
-                        <li>Create a node with some numbers, and confirm [literal] operation. Connect it to the main trigger.</li>
-                        <li>Add a node that calculates the sum of the numbers. </li>
-                        <li>Add a node that counts the numbers. </li>
-                        <li>Make the last node that divides the sum by the count.</li>
-                        <li>Save and test your module.</li>
-                        </ol>
-                    </div>
-                </div>
+
+            <h1 class='VESPY-h1'>Closing Survey</h1>
+            <div class="chapter" style="margin-top:0px;">   
+                You have practiced VESPY using <b>manual</b> and <b>automatic</b> method. 
+                <br>How easy or difficult was it to learn each method? 
+                <table class='likert'>
+                  <tr>
+                      <td></td>
+                      <td colspan='3' style='text-align:left;'>Very easy</td>
+                      <td colspan='4' style='text-align:right;'>Very difficult</td>
+                  </tr>
+                  <tr class='automatic'>
+                    <td class='survey_header'>Automatic</td>
+                    <td><input type='radio' name='automatic' value='1' /></td>
+                    <td><input type='radio' name='automatic' value='2' /></td>
+                    <td><input type='radio' name='automatic' value='3' /></td>
+                    <td><input type='radio' name='automatic' value='4' /></td>
+                    <td><input type='radio' name='automatic' value='5' /></td>
+                    <td><input type='radio' name='automatic' value='6' /></td>
+                    <td><input type='radio' name='automatic' value='7' /></td>
+                  </tr>
+                  <tr class='manual'>
+                    <td class='survey_header'>Manual</td>
+                    <td><input id='radStart' type='radio' name='manual' value='1' /></td>
+                    <td><input type='radio' name='manual' value='2' /></td>
+                    <td><input type='radio' name='manual' value='3' /></td>
+                    <td><input type='radio' name='manual' value='4' /></td>
+                    <td><input type='radio' name='manual' value='5' /></td>
+                    <td><input type='radio' name='manual' value='6' /></td>
+                    <td><input id='radEnd' type='radio' name='manual' value='7' /></td>
+                  </tr>
+                </table>
+                <div>\
+                    <button type='button' id='submit_survey' class='centered btn btn-lg btn-success'>Submit</button>\
+                </div>\
             </div>
-            -->
-            <!--
-            <div class="chapter"> 
-                <h3>Setting element attributes</h3>
-                Modifying existing Web elements require two inputs; 1) Elements to update and 2)new values. In the figure below, the [Set Attribute] node changes background-color attributes of the three elements to red.   
-                    <img class="centered" src='images/set_attr_1.png' width="700"/>
-                <ol>
-                    <li>Create [Set Attribute] node on grid UI. </li>
-                    <li>Place the original elements above the node, and the new attribute values left to the node. <br>
-                        Or you can modify [Set Attribute] node's I1 and I2 to point original elements and new values respectively. </li>
-                    <li>Select the [Set Attribute] node to see details. Click the first parameter, which might be 'text' by default. Change it to 'background-color' so that the description would be "Set [background-color attributes] of [I1] to [I2]." </li>
-                    <li>Execute the operation (<i class="fa fa-play-circle-o"></i>) to see the result.</li>
-                </ol>
-                
-                    Let's try what you have learned. In the table below, change colors of the third ('Points') column to 'green'.   
-                    <center><table class='table table-bordered' style="width:300px">
-                        <thead>
-                        <tr><th>Firstname</th><th>Lastname</th><th>Points</th></tr>
-                        </thead>
-                        <tr>
-                          <td>Jill</td>
-                          <td>Smith</td> 
-                          <td>50</td>
-                        </tr>
-                        <tr>
-                          <td>Eve</td>
-                          <td>Jackson</td> 
-                          <td>94</td>
-                        </tr>
-                        <tr>
-                          <td>John</td>
-                          <td>Doe</td> 
-                          <td>80</td>
-                        </tr>
-                        <tr>
-                          <td>Adam</td>
-                          <td>Johnson</td> 
-                          <td>67</td>
-                        </tr>
-                    </table></center>
-            </div>
-            -->
+            <script>
+                $("button#submit_survey").click($.proxy(function() {
+                    // var log = {}
 
-            <!--
-            <div class="chapter"> 
-                <h3>Getting attributes from elements</h3>
-                Web elements contain many kinds of attributes. For example, a link element may contain text, download, visibility, color, background-color, link, and more. To get specific attributes from elements, follow the steps below. 
-                <ol>
-                    <li>Prepare the first node that contains one or more elements. You can use the node created in the previous "Extract Page Elements".</li> 
-                    <li>Below the node, create the second node. By default, the first input (I1) of the node is "_above". Thus you can see the element in the node detail UI as shown below.     </li>
-                        <img class="centered" src='images/get_attr_2.png' width="700"/>
-                    <li>If you want to get 'source' attribute, put mouse cursor over the source attribute and press <i class="fa fa-sign-out" style="color:red;"></i> button. It will add the attribute value to the current node value.</li>
-                        <img class="centered" src='images/get_attr_3.png' width="700"/>
-                    <li>At the same time, the tools panel would suggest [Get Attribute] task. Confirm it with [Insert this task]. </li>
-                        <img class="centered" src='images/get_attr_4.png'/>
-                    <li>Now the second node has the operation for getting 'source' attributes from I1. If I1 node contains multiple elements, execute the operation (<i class="fa fa-play-circle-o"></i>) to update the node values.</li>
-                        <img class="centered" src='images/get_attr_5.png' width="700"/>
-                </ol>
-                Congratulation!  You have finished learning basic usage of the Tandem UI. In the following section, you will practice building simple enhancements. 
-                <br><br>Take a break now if you want. Or press the button below to move on. <br> <br>
-            </div>
 
-            <!--<center><button type="button" role="open_section_2" class="btn btn-success">Proceed</button></center>-->
-
-            <!--
-            <div class="chapter"> 
-                <h3>Filtering items</h3>
-                Filtering is a common procedure that chooses subset among a list of items. For example, imagine you are interested in cars from a specific brand in an online market. First you need to filter the postings by the brand names you are interested in. Then with the filtered items, you can do many things such as highlighting them to stand out, hide the rest, or even creating a digest report and sending yourself. <br>
-                <br>
-                The following example will filter the table rows by points higher than 70, and highlight them.    
-                <center><table class='table table-bordered' style="width:300px">
-                    <thead>
-                    <tr><th>Firstname</th><th>Lastname</th><th>Points</th></tr>
-                    </thead>
-                    <tr>
-                      <td>Jill</td>
-                      <td>Smith</td> 
-                      <td>50</td>
-                    </tr>
-                    <tr>
-                      <td>Eve</td>
-                      <td>Jackson</td> 
-                      <td>94</td>
-                    </tr>
-                    <tr>
-                      <td>John</td>
-                      <td>Doe</td> 
-                      <td>80</td>
-                    </tr>
-                    <tr>
-                      <td>Adam</td>
-                      <td>Johnson</td> 
-                      <td>67</td>
-                    </tr>
-                </table></center>
-                <ol>
-                <li>With 2-step extraction, get the rows of the table. The rows will be filtered and modified.</li>
-                    <img class="centered" src='images/filter_1.png'/>
-                <li>In order to filter by points, we need to get the numbers. Create a node below the rows, and manually type the first value that you want to extract, which would be 50.</li>
-                    <img class="centered" src='images/filter_2.png' width="700"/>
-                <li>Now you can choose the matching task [Extract element > Get Attribute] in the tools panel. Confirm it by clicking [Insert this task] button. It will append two nodes that extract the points.</li>
-                    <img class="centered" src='images/filter_3.png'/>
-                <li>What we want to do is filtering row elements according to their scores. Let's give the computer examples for finding how to do the job. Create an empty node and set I1 to the rows to be filtered, and I2 to the points. </li>
-                    <img class="centered" src='images/filter_4.png' width="700"/>
-                <li>Take the rows to be chosen by clicking button below them. You will see new tasks are suggested in the tools panel. Among them, confirm [Number Test > Filter] because we wanted to filter elements by testing numbers.  </li>
-                    <img class="centered" src='images/filter_5.png'/>
-                <li>The result is almost correct, however, the [Number Test]'s parameter 80 has to be changed as we want to choose rows above 70. </li>
-                <li>It is time to highlight those filtered rows. Let's change their [color] attributes to 'red'. Create a [Set Attribute] node by dragging it from the tools panel, and change 'text' parameter to 'color', and 'I2' to 'red'.</li>
-                    <img class="centered" src='images/filter_6.png'  width="700"/>
-                </ol>
-            </div>
-
-            -->
-            <!--
-            <div class="chapter"> 
-                <h3>Interactivity</h3>
-                Tandem allows end-users to create interactive components and specify what will happen when they are clicked or changed. Interactive components (e.g. buttons, combo-box, text input) can make programs much more flexible and useful in various situations. To see an example, load [Interactive Data Table] enhancement, and execute. It will make an ordinary table below interactive so that you can change the weight of each person and toggle checkboxes to include or exclude the person to calculate the weighted sum.
-                    <center><table class='table table-bordered' style="width:300px">
-                        <thead><tr><th>Firstname</th><th>Lastname</th><th>Points</th></tr></thead>
-                        <tr><td>Jill</td><td>Smith</td><td>50</td></tr>
-                        <tr><td>Eve</td><td>Jackson</td><td>94</td></tr>
-                        <tr><td>John</td><td>Doe</td><td>80</td></tr>
-                        <tr><td>Adam</td><td>Johnson</td><td>67</td></tr>
-                    </table></center>
-                    <img class="centered" src='images/intVSnon-int.png'  width="700"/>
-                The following example creates buttons for every row. When a button is clicked, it will change the corresponding row's color to blue. 
-                    <center><table class='table table-bordered' style="width:400px">
-                        <thead><tr><th>Common apple name</th><th>Origin</th><th>Year</th><th>Use</th></tr></thead>
-                        <tr><td>Anna</td><td>Israel</td><td>1965</td><td>Eating</td></tr>
-                        <tr><td>Ariane</td><td>France</td><td>2002</td><td>Eating</td></tr>
-                        <tr><td>Beacon</td><td>US</td><td>1936</td><td>Cooking</td></tr>
-                        <tr><td>Claygate</td><td>UK</td><td>1910</td><td>Dessert</td></tr>
-                        <tr><td>Muscadet de Dieppe</td><td>France</td><td>1750</td><td>Cider</td></tr>
-                        <tr><td>Wealthy</td><td>US</td><td>1860</td><td>Eating</td></tr>
-                    </table></center>
-                <ol>
-                <li>Create a new enhancement. </li>
-                <li>Extract the table body ("TBODY"), and first columns ("TD") of each row.</li>
-                <li>Create a button with any label - here we use "OK". Don't forget to set its input to the Trigger node so that the node will be executed.</li>
-                <li>Attach the buton at the front of the extracted columns.</li>
-                <li>Add Trigger next to the attached elements.</li>
-                <li>Now, save the current enhancement, reload the page, open Tandem UI, and execute the enhancement. You will be able to see the buttons are attached for first columns of every row.</li>
-                <li>Try click OK button. The value of the trigger node will be updated to the clicked button. We want to do something with the clicked button.</li>
-                <li>Create a node next to the trigger. Manually extract the row of the button you just clicked. Tandem will suggest a [Extract Parent] task, because the row is a parent element of its input value. Confirm it. </li>
-                <li>The last step is to set color attribute of the row to 'blue'.</li>
-                </ol>
-
-              <a href="videos/movie-interactive.mov" target="_blank">movie</a>
-                <OBJECT classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="640"
-                    height="360" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
-                    <param name='src' value="videos/movie-interactive.mov">
-                    <param name='autoplay' value="false">
-                    <param name='controller' value="true">
-                    <param name='loop' value="false">
-                    <EMBED src="videos/movie-interactive.mov" width="640" height="360" autoplay="true" 
-                    controller="true" loop="true" pluginspage='videos/movie-interactive.mov'>
-                    </EMBED>
-                </OBJECT> 
-
-            </div>      
-            -->
-
-            
+                    // var survey_result={"task":this.task_key, "firstMethod":this.firstMethod};
+                    // var all_question_answered = true;
+                    // $("div.survey_item").each(function(i,div) {
+                    //     var item_num = $(div).attr("number"); 
+                    //     var automatic_value = $(div).find("input[name='"+item_num+"_automatic']:checked").val();   
+                    //     var manual_value = $(div).find("input[name='"+item_num+"_manual']:checked").val();   
+                    //     if(typeof automatic_value == 'undefined' || typeof manual_value == 'undefined')
+                    //         all_question_answered = false;
+                    //     survey_result[item_num]= {'automatic':automatic_value, 'manual':manual_value};
+                    // });
+                    // if(!all_question_answered) {
+                    //     $("button#submit_survey").after("<div>Please answer all questions.</div>");
+                    //     return;
+                    // }
+                    // pg.log.add({type:"survey",survey_result:survey_result});
+                    // $(this).addClass("disabled");
+                },{task_key:task_key,firstMethod:firstMethod}));
+            </script>
 
 	    </div>
   	</div> <!-- row -->
 </div> <!-- main container -->
-
-
-<script>
-$(function() {
-  $("ul.nav-sidebar").find('a').click(function() {
-  	$("ul.nav-sidebar").find('li').removeClass("active");
-  	$(this).parents("li").addClass("active");
-  	//openChapter($(this).attr("chapterCode"));
-  });
-
-  $("div.try").find(".show_hint").click(function(e) {
-    $(this).parent().find("div.hint").show('slow');
-    $(this).hide();
-    //increase_hint_used();
-  });
-
-  hint_used = 0;
-
-  //openChapter("intro");
-});
-
-function increase_hint_used() {
-    hint_used = hint_used+1;
-    $("#num_hints_used").text(hint_used);
-}
-
-function openChapter(code) {
-	$(".main").find(".chapter").hide();
-  	$(".main").find(".chapter[chapterCode='"+code+"']").show();
-}
-
-
-</script>
-
 
 
 
